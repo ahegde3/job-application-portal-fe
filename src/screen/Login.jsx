@@ -40,6 +40,7 @@ export default function Login() {
       <Container component="main" maxWidth="xs">
         {/* <CssBaseline /> */}
         <div className="Page" style={{ border: "solid", padding: "45px" }}>
+          <Logo />
           <Box
             sx={{
               marginTop: 8,
@@ -98,6 +99,7 @@ export default function Login() {
                   label="Remember me"
                 />
                 <Button
+                  onSubmit={() => console.log("submited")}
                   type="submit"
                   fullWidth
                   variant="contained"
