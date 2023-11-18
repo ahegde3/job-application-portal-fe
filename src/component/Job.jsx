@@ -2,9 +2,10 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-export default function Job({ id, name, description }) {
+export default function Job({ id, name, companyName, location, description }) {
   return (
     <Card
+      style={{ marginTop: "10px", borderRadius: "10px", cursor: "pointer" }}
       onClick={() => {
         //   beer.details = !beer.details;
       }}
@@ -14,7 +15,9 @@ export default function Job({ id, name, description }) {
         <CardMedia image={imageUrl} className="media" />
       )} */}
       <CardContent>
-        <h3>{name}</h3>
+        <h1>{name}</h1>
+        <h3>{companyName}</h3>
+        <p> {location}</p>
         {/* {details ? (
           <p>{description}</p>
         ) : (
