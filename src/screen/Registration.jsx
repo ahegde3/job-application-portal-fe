@@ -1,11 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -13,6 +11,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import UserDetail from "../component/UserDetail";
+import AddressComponent from "../component/AddressComponent";
+import EducationComponent from "../component/EducationComponent";
+import WorkExperienceComponent from "../component/WorkExperienceComponent";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -42,6 +44,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Registration() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const registrationInformationComponents = [
+    <UserDetail />,
+    <AddressComponent />,
+    <EducationComponent />,
+    <WorkExperienceComponent />,
+  ];
+  const [currentComponent, setCurrentComponent] = useState(0);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -53,110 +62,19 @@ export default function Registration() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="phoneNo"
-                label="Phone Number"
-                name="phoneNo"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="streetNo"
-                label="Street Number"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="streetName"
-                label="Street Name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="city"
-                label="City"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="state"
-                label="State"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="zipcode"
-                label="Zip code"
-              />
-            </Grid>
-          </Grid>
+        <div>{registrationInformationComponents[currentComponent]}</div>
+        {currentComponent != registrationInformationComponents.length - 1 ? (
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => setCurrentComponent(currentComponent + 1)}
+          >
+            Next
+          </Button>
+        ) : (
           <Button
             type="submit"
             fullWidth
@@ -165,16 +83,17 @@ export default function Registration() {
             className={classes.submit}
             onClick={() => navigate("/home")}
           >
-            Sign Up
+            Submit
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="/" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
+        )}
+        <Grid container justify="flex-end">
+          <Grid item>
+            <Link href="/" variant="body2">
+              Already have an account? Sign in
+            </Link>
           </Grid>
-        </form>
+        </Grid>
+        {/* </form> */}
       </div>
       <Box mt={5}></Box>
     </Container>
