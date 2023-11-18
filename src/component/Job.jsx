@@ -1,76 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-export default function Job({ id, name, companyName, location, description }) {
+export default function Job(job) {
+  const navigate = useNavigate();
   return (
     <Card
       style={{ marginTop: "10px", borderRadius: "10px", cursor: "pointer" }}
       onClick={() => {
-        //   beer.details = !beer.details;
+        navigate("/opening", { replace: true, state: { job } });
       }}
       className="job"
     >
-      {/* {!beer.details && (
-        <CardMedia image={imageUrl} className="media" />
-      )} */}
       <CardContent>
-        <h1>{name}</h1>
-        <h3>{companyName}</h3>
-        <p> {location}</p>
-        {/* {details ? (
-          <p>{description}</p>
-        ) : (
-          <ul>
-            {foodPairing.map(food => (
-              <li key={food}>{food}</li>
-            ))}
-          </ul>
-        )} */}
+        <h1>{job.name}</h1>
+        <h3>{job.companyName}</h3>
+        <p> {job.location}</p>
       </CardContent>
     </Card>
   );
 }
-
-// import React from 'react';
-// import { view, store } from '@risingstack/react-easy-state';
-// import Card from '@material-ui/core/Card';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import CardContent from '@material-ui/core/CardContent';
-
-// // this is re-rendered whenever the relevant parts of the used data stores change
-// const Beer = ({
-//   name,
-//   description,
-//   image_url: imageUrl,
-//   food_pairing: foodPairing,
-// }) => {
-//   const beer = store({ details: false });
-
-//   return (
-//     <Card
-//       onClick={() => {
-//         beer.details = !beer.details;
-//       }}
-//       className="beer"
-//     >
-//       {!beer.details && (
-//         <CardMedia image={imageUrl} className="media" />
-//       )}
-//       <CardContent>
-//         <h3>{name}</h3>
-//         {beer.details ? (
-//           <p>{description}</p>
-//         ) : (
-//           <ul>
-//             {foodPairing.map(food => (
-//               <li key={food}>{food}</li>
-//             ))}
-//           </ul>
-//         )}
-//       </CardContent>
-//     </Card>
-//   );
-// };
-
-// export default view(Beer);
