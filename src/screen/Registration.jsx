@@ -50,7 +50,7 @@ export default function Registration() {
     <EducationComponent />,
     <WorkExperienceComponent />,
   ];
-  const [currentComponent, setCurrentComponent] = useState(0);
+  const [currentComponentIndex, setcurrentComponentIndex] = useState(0);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -62,15 +62,16 @@ export default function Registration() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <div>{registrationInformationComponents[currentComponent]}</div>
-        {currentComponent != registrationInformationComponents.length - 1 ? (
+        <div>{registrationInformationComponents[currentComponentIndex]}</div>
+        {currentComponentIndex !==
+        registrationInformationComponents.length - 1 ? (
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => setCurrentComponent(currentComponent + 1)}
+            onClick={() => setcurrentComponentIndex(currentComponentIndex + 1)}
           >
             Next
           </Button>
@@ -86,16 +87,17 @@ export default function Registration() {
             Submit
           </Button>
         )}
-        <Grid container justify="flex-end">
-          <Grid item>
-            <Link href="/" variant="body2">
-              Already have an account? Sign in
-            </Link>
+        {currentComponentIndex === 0 && (
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="/" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
         {/* </form> */}
       </div>
-      <Box mt={5}></Box>
     </Container>
   );
 }
