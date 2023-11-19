@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
+import JobApplication from "../component/JobApplication";
 
 export default function Opening() {
   const { state } = useLocation();
   console.log(state);
 
   const { id, name, companyName, location, description } = state.job || {};
+
+  const [applyForTheJob, setApplyForJobs] = useState(false);
 
   const requirements = `Required Qualifications\n\n
   - Bachelors or advanced degree in Computer Science/Engineering or equivalent.\n\n
@@ -49,16 +52,23 @@ export default function Opening() {
         <p>About {companyName}</p>
         <span>{companyInfo}</span>
       </div>
-
-      <Button
-        onSubmit={() => console.log("submited")}
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-      >
-        Apply to this Job
-      </Button>
+      {console.log(applyForTheJob)}
+      {!applyForTheJob ? (
+        <Button
+          onClick={(e) => {
+            console.log("inside");
+            setApplyForJobs(true);
+          }}
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Apply to this Job
+        </Button>
+      ) : (
+        <JobApplication />
+      )}
     </div>
   );
 }
