@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import Avatar from "@mui/material/Avatar";
 import Button from "@material-ui/core/Button";
@@ -8,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -37,7 +39,14 @@ export default function Navbar() {
         style={{ marginTop: "36px" }}
       >
         <MenuItem onClick={handleClose}>Update Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            localStorage.removeItem("isLogged");
+            navigate("/");
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     </div>
   );

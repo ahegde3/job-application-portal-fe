@@ -30,6 +30,7 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    localStorage.setItem("isLogged", true);
     navigate("/home");
     // const data = new FormData(event.currentTarget);
     // console.log({
