@@ -19,6 +19,9 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { ToastContainer, toast } from "react-toastify";
+import { authenticateUser } from "../api/candidate";
+import "react-toastify/dist/ReactToastify.css";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -28,19 +31,38 @@ export default function Login() {
   const [tabValue, setTabValue] = useState("Candidate");
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    authenticateUser("candidate", email, password).then((res) =>
+      console.log(res)
+    );
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    localStorage.setItem("isLogged", true);
-    navigate("/home");
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+    if (email && password)
+      authenticateUser("candidate", email, password).then((res) => {
+        if (!res) {
+          toast.error("Enter valid email id and password", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          return;
+        }
+        console.log(res);
+        localStorage.setItem("isLogged", true);
+        navigate("/home");
+      });
+    else
+      toast.error("Enter valid email id and password", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <ToastContainer />
       <Container component="main" maxWidth="xs">
         {/* <CssBaseline /> */}
         <div className="Page" style={{ border: "solid", padding: "45px" }}>
@@ -86,6 +108,7 @@ export default function Login() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   autoFocus
                 />
                 <TextField
@@ -96,6 +119,7 @@ export default function Login() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                 />
                 <FormControlLabel
@@ -103,7 +127,7 @@ export default function Login() {
                   label="Remember me"
                 />
                 <Button
-                  onSubmit={() => console.log("submited")}
+                  // onClick={() => handleLogin()}
                   type="submit"
                   fullWidth
                   variant="contained"
