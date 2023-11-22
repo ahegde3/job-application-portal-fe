@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -21,6 +21,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { ToastContainer, toast } from "react-toastify";
 import { authenticateCandidate } from "../api/candidate";
+import { authenticateCompany } from "../api/company";
 import "react-toastify/dist/ReactToastify.css";
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -36,7 +37,7 @@ export default function Login() {
 
   const authenticateUser = {
     candidate: authenticateCandidate,
-    company: authenticateCandidate,
+    company: authenticateCompany,
   };
 
   const handleSubmit = (event) => {
@@ -58,6 +59,10 @@ export default function Login() {
         position: toast.POSITION.TOP_RIGHT,
       });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("isLogged") === "true") navigate("/home");
+  }, [navigate]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
