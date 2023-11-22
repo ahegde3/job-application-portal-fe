@@ -22,7 +22,6 @@ import TabPanel from "@mui/lab/TabPanel";
 import { ToastContainer, toast } from "react-toastify";
 import { authenticateCandidate } from "../api/candidate";
 import { authenticateCompany } from "../api/company";
-import "react-toastify/dist/ReactToastify.css";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -66,7 +65,7 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Container component="main" maxWidth="xs">
         {/* <CssBaseline /> */}
         <div className="Page" style={{ border: "solid", padding: "45px" }}>
@@ -131,7 +130,6 @@ export default function Login() {
                   label="Remember me"
                 />
                 <Button
-                  // onClick={() => handleLogin()}
                   type="submit"
                   fullWidth
                   variant="contained"

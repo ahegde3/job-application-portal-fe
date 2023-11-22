@@ -14,7 +14,7 @@ export default function Job(job) {
       className="job"
     >
       <CardContent>
-        <h1>{job.name}</h1>
+        <h1>{job.title}</h1>
         <h3>{job.companyName}</h3>
         <p> {job.location}</p>
       </CardContent>

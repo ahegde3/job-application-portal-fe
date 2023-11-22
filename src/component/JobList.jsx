@@ -8,7 +8,7 @@ export default function JobList({ jobs }) {
       {!jobs?.length ? (
         <h3>No matching beers found!</h3>
       ) : (
-        jobs.map((job) => <Job key={job.name} {...job} />)
+        jobs.map((job) => <Job key={job.title} {...job} />)
       )}
     </div>
   );

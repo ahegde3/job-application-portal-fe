@@ -3,12 +3,15 @@ import "./App.css";
 import Login from "./screen/Login";
 import Home from "./screen/Home";
 import Opening from "./screen/Opening";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Registration from "./screen/Registration";
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
