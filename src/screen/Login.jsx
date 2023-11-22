@@ -20,7 +20,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { ToastContainer, toast } from "react-toastify";
-import { authenticateUser } from "../api/candidate";
+import { authenticateCandidate } from "../api/candidate";
 import "react-toastify/dist/ReactToastify.css";
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -28,22 +28,21 @@ import "react-toastify/dist/ReactToastify.css";
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const [tabValue, setTabValue] = useState("Candidate");
+  const [currentTab, setCurrentTab] = useState("candidate");
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    authenticateUser("candidate", email, password).then((res) =>
-      console.log(res)
-    );
+  const authenticateUser = {
+    candidate: authenticateCandidate,
+    company: authenticateCandidate,
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (email && password)
-      authenticateUser("candidate", email, password).then((res) => {
+      authenticateUser[currentTab]?.(email, password).then((res) => {
         if (!res) {
           toast.error("Enter valid email id and password", {
             position: toast.POSITION.TOP_RIGHT,
@@ -81,16 +80,16 @@ export default function Login() {
             </Typography> */}
 
               <TabContext
-                value={tabValue}
+                value={currentTab}
                 style={{ display: "flex", justifyContent: "center" }}
               >
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                   <TabList
-                    onChange={(e, newValue) => setTabValue(newValue)}
+                    onChange={(e, newValue) => setCurrentTab(newValue)}
                     aria-label="lab API tabs example"
                   >
-                    <Tab label="Candidate" value="Candidate" />
-                    <Tab label="Company" value="Company" />
+                    <Tab label="Candidate" value="candidate" />
+                    <Tab label="Company" value="company" />
                   </TabList>
                 </Box>
               </TabContext>

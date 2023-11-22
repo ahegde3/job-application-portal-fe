@@ -1,7 +1,7 @@
 import { BASE_URL } from "../constant/api";
 
-const authenticateCandidate = (email, password) => {
-  const url = `${BASE_URL}/company/loginCandidate`;
+const authenticateCompany = (email, password) => {
+  const url = `${BASE_URL}/company/loginCompany`;
   return fetch(url, {
     method: "POST",
     mode: "cors",
@@ -16,4 +16,4 @@ const authenticateCandidate = (email, password) => {
   });
 };
 
-export { authenticateCandidate };
+export { authenticateCompany };
