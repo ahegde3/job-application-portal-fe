@@ -4,18 +4,19 @@ import Button from "@mui/material/Button";
 import React from "react";
 import DiversityComponent from "./DiversityComponent";
 
-export default function JobApplication() {
-  const applicationQuestions = [
-    "Why do you want to work with us?",
-    "Why should we hire you?",
-  ];
+export default function JobApplication({ applicationQuestions }) {
+  console.log(applicationQuestions);
+  // const applicationQuestions = [
+  //   "Why do you want to work with us?",
+  //   "Why should we hire you?",
+  // ];
   return (
     <div>
       <div>
         <h2>Apply for this Job</h2>
       </div>
       <Grid container spacing={2}>
-        {applicationQuestions?.map((question, key) => (
+        {applicationQuestions?.map(({ appQuestionDesc }, key) => (
           <Grid item xs={12} key={key}>
             {console.log(key)}
             <TextField
@@ -24,7 +25,7 @@ export default function JobApplication() {
               required
               fullWidth
               id="firstName"
-              label={question}
+              label={appQuestionDesc}
               autoFocus
             />
           </Grid>

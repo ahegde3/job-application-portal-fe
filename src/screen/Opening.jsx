@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import JobApplication from "../component/JobApplication";
+import { getJobOpeningDetails, getJobApplicationQuestions } from "../api/jobs";
 
 export default function Opening() {
   const { state } = useLocation();
-  console.log(state);
+  //console.log(state);
 
-  const { id, name, companyName, location, description } = state.job || {};
+  const { jobId, name, companyName, location, description } = state.job || {};
 
   const [applyForTheJob, setApplyForJobs] = useState(false);
+  const [applicationQuestions, setApplicationQuestions] = useState([]);
 
   const requirements = `Required Qualifications\n\n
   - Bachelors or advanced degree in Computer Science/Engineering or equivalent.\n\n
@@ -28,6 +30,12 @@ export default function Opening() {
   - Strong interest or previous experience in finance.\n`;
 
   const companyInfo = `Lazard, one of the world's preeminent financial advisory and asset management firms, operates from 43 cities across 27 countries in North America, Europe, Asia, Australia, Central and South America. With origins dating to 1848, the firm provides advice on mergers and acquisitions, strategic matters, restructuring and capital structure, capital raising and corporate finance, as well as asset management services to corporations, partnerships, institutions, governments and individuals. For more information on Lazard, please visit www.lazard.com.`;
+
+  useEffect(() => {
+    getJobOpeningDetails(jobId).then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   return (
     <div>
@@ -57,7 +65,11 @@ export default function Opening() {
         <Button
           onClick={(e) => {
             console.log("inside");
-            setApplyForJobs(true);
+            getJobApplicationQuestions(jobId).then((res) => {
+              //   console.log(res);
+              setApplicationQuestions(res);
+              setApplyForJobs(true);
+            });
           }}
           type="submit"
           fullWidth
@@ -67,7 +79,7 @@ export default function Opening() {
           Apply to this Job
         </Button>
       ) : (
-        <JobApplication />
+        <JobApplication applicationQuestions={applicationQuestions} />
       )}
     </div>
   );

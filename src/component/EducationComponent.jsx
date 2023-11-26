@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { Box } from "@mui/material";
 
 export default function EducationComponent() {
+  
   return (
     <Box>
       <Typography
