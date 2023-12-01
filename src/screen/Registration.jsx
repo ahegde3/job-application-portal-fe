@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,6 +15,8 @@ import UserDetail from "../component/UserDetail";
 import AddressComponent from "../component/AddressComponent";
 import EducationComponent from "../component/EducationComponent";
 import WorkExperienceComponent from "../component/WorkExperienceComponent";
+import { CANDIDATE } from "../constant/constants";
+import { registerCompany } from "../api/company";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -42,15 +44,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Registration() {
+  const [userInformation, setUserInformation] = useState(null);
+  const [userAddress, setUserAddress] = useState(null);
+  const [educationInformation, setEducationInformation] = useState(null);
+
+  const userType = useLocation()?.state.userType;
+
   const classes = useStyles();
   const navigate = useNavigate();
-  const registrationInformationComponents = [
-    <UserDetail />,
+
+  const companyRegistrationComponent = [
+    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
+    <AddressComponent setUserAddress={setUserAddress} />,
+  ];
+
+  const candidateRegistrationComponent = [
+    <UserDetail userType={userType} />,
     <AddressComponent />,
     <EducationComponent />,
     <WorkExperienceComponent />,
   ];
+  const registrationInformationComponents =
+    userType === CANDIDATE
+      ? [...candidateRegistrationComponent]
+      : [...companyRegistrationComponent];
   const [currentComponentIndex, setcurrentComponentIndex] = useState(0);
+
+  const onSubmit = () => {
+    console.log("inside on submit");
+    if (userType === CANDIDATE) {
+    } else {
+      const userData = {
+        ...userInformation,
+        ...userAddress,
+      };
+      registerCompany(userData).then(() => navigate("/home"));
+      //TODO: FOr error show some toast
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -82,7 +113,7 @@ export default function Registration() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => navigate("/home")}
+            onClick={onSubmit}
           >
             Submit
           </Button>

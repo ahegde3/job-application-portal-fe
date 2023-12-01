@@ -16,4 +16,21 @@ const authenticateCompany = (email, password) => {
   });
 };
 
-export { authenticateCompany };
+const registerCompany = (userData) => {
+  
+  const url = `${BASE_URL}/company/registerCompany`;
+  return fetch(url, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify({userData }),
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
+};
+
+export { authenticateCompany,registerCompany };

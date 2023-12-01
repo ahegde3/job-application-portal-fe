@@ -22,13 +22,14 @@ import TabPanel from "@mui/lab/TabPanel";
 import { ToastContainer, toast } from "react-toastify";
 import { authenticateCandidate } from "../api/candidate";
 import { authenticateCompany } from "../api/company";
+import { CANDIDATE, COMPANY } from "../constant/constants";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const [currentTab, setCurrentTab] = useState("candidate");
+  const [currentTab, setCurrentTab] = useState("CANDIDATE");
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -92,8 +93,8 @@ export default function Login() {
                     onChange={(e, newValue) => setCurrentTab(newValue)}
                     aria-label="lab API tabs example"
                   >
-                    <Tab label="Candidate" value="candidate" />
-                    <Tab label="Company" value="company" />
+                    <Tab label={CANDIDATE} value={CANDIDATE} />
+                    <Tab label={COMPANY} value={COMPANY} />
                   </TabList>
                 </Box>
               </TabContext>
@@ -148,7 +149,12 @@ export default function Login() {
                   <Link
                     // href="#"
                     variant="body2"
-                    onClick={() => navigate("/registration")}
+                    onClick={() =>
+                      navigate("/registration", {
+                        replace: true,
+                        state: { userType: currentTab },
+                      })
+                    }
                   >
                     {"Don't have an account? Sign Up"}
                   </Link>
