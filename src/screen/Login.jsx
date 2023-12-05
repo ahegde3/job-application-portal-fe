@@ -36,11 +36,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const authenticateUser = {
-    candidate: authenticateCandidate,
-    company: authenticateCompany,
+    [CANDIDATE]: authenticateCandidate,
+    [COMPANY]: authenticateCompany,
   };
 
   const handleSubmit = (event) => {
+    console.log("inside submit", email, password, currentTab);
     event.preventDefault();
     if (email && password)
       authenticateUser[currentTab]?.(email, password).then((res) => {
@@ -52,6 +53,8 @@ export default function Login() {
         }
         console.log(res);
         localStorage.setItem("isLogged", true);
+        localStorage.setItem("userType", currentTab);
+        localStorage.setItem("userId", res.user_id);
         navigate("/home");
       });
     else
@@ -135,12 +138,7 @@ export default function Login() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={() =>
-                    navigate("/home", {
-                      replace: true,
-                      state: { userType: currentTab },
-                    })
-                  }
+                  onClick={handleSubmit}
                 >
                   Sign In
                 </Button>

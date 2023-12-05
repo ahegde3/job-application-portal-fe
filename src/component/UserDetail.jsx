@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Box } from "@mui/material";
 import { COMPANY } from "../constant/constants";
+import { getCandidateInformation } from "../api/candidate";
 
-export default function UserDetail({ userType, setUserInformation }) {
+export default function UserDetail({
+  userType,
+  userInformation,
+  setUserInformation,
+  isUpdate,
+}) {
+  console.log(userInformation);
   //const [name,setName]
+  // const [userProfileData, setUserProfileData] = useState({});
+
+  // useEffect(() => {
+  //   if (!isUpdate) return;
+  //   getCandidateInformation(localStorage.getItem("userId")).then((res) =>
+  //     setUserProfileData(res)
+  //   );
+  // }, []);
+
   return (
     <Box>
       <Typography
@@ -29,6 +45,7 @@ export default function UserDetail({ userType, setUserInformation }) {
               fullWidth
               id="firstName"
               label="First Name"
+              value={userInformation?.firstName || ""}
               autoFocus
             />
           </Grid>
@@ -40,6 +57,7 @@ export default function UserDetail({ userType, setUserInformation }) {
               id="lastName"
               label="Last Name"
               name="lastName"
+              value={userInformation?.lastName || ""}
               autoComplete="lname"
             />
           </Grid>
@@ -51,6 +69,7 @@ export default function UserDetail({ userType, setUserInformation }) {
               id="email"
               label="Email Address"
               name="email"
+              value={userInformation?.emailId || ""}
               autoComplete="email"
             />
           </Grid>
@@ -73,6 +92,7 @@ export default function UserDetail({ userType, setUserInformation }) {
               label="Password"
               type="password"
               id="password"
+              value={userInformation?.password || ""}
               autoComplete="current-password"
             />
           </Grid>

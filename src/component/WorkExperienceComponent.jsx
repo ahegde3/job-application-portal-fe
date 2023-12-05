@@ -8,9 +8,10 @@ import { Box } from "@mui/material";
 import ColoredLine from "./ColoredLine";
 
 export default function WorkExperienceComponent({
+  workExperienceInformation,
   setWorkExperienceInformation,
 }) {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(workExperienceInformation?.length || 1);
   return (
     <Box>
       <Typography
@@ -23,6 +24,7 @@ export default function WorkExperienceComponent({
       {[...Array(count)].map((_, index) => (
         <WorkexperienceDetailComponent
           position={index}
+          workExperienceInformation={workExperienceInformation}
           setCount={setCount}
           setWorkExperienceInformation={setWorkExperienceInformation}
         />
@@ -45,6 +47,7 @@ export default function WorkExperienceComponent({
 const WorkexperienceDetailComponent = ({
   position,
   setCount,
+  workExperienceInformation,
   setWorkExperienceInformation,
 }) => {
   const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(false);
@@ -61,6 +64,7 @@ const WorkexperienceDetailComponent = ({
       return updatedExperience; // Return the updated education array
     });
   };
+
   return (
     <Grid container spacing={2}>
       {position > 0 && <ColoredLine />}
@@ -75,6 +79,7 @@ const WorkexperienceDetailComponent = ({
           fullWidth
           id="position"
           label="Position"
+          value={workExperienceInformation?.[position].position || ""}
           onChange={(e) =>
             setWorkExperienceValues("position", e.target.value, position)
           }
@@ -88,6 +93,7 @@ const WorkexperienceDetailComponent = ({
           fullWidth
           id="organization"
           label="Organization"
+          value={workExperienceInformation?.[position].organizationName || ""}
           onChange={(e) =>
             setWorkExperienceValues("organization", e.target.value, position)
           }
@@ -101,6 +107,7 @@ const WorkexperienceDetailComponent = ({
           fullWidth
           id="responsibilities"
           label="Responsibilites"
+          value={workExperienceInformation?.[position].responsibilities || ""}
           onChange={(e) =>
             setWorkExperienceValues(
               "responsibilities",
@@ -120,6 +127,7 @@ const WorkexperienceDetailComponent = ({
               fullWidth
               id="startDate"
               label="Start Date"
+              value={workExperienceInformation?.[position].startDate || ""}
               onChange={(e) =>
                 setWorkExperienceValues("startDate", e.target.value, position)
               }
@@ -133,6 +141,7 @@ const WorkexperienceDetailComponent = ({
               fullWidth
               id="endDate"
               label="End Date"
+              value={workExperienceInformation?.[position].endDate || ""}
               onChange={(e) =>
                 setWorkExperienceValues("endDate", e.target.value, position)
               }
@@ -148,6 +157,7 @@ const WorkexperienceDetailComponent = ({
             fullWidth
             id="startDate"
             label="Start Date"
+            value={workExperienceInformation?.[position].startDate || ""}
             onChange={(e) =>
               setWorkExperienceValues("startDate", e.target.value, position)
             }

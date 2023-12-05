@@ -16,6 +16,27 @@ const authenticateCandidate = (email, password) => {
   });
 };
 
+const getCandidateInformation = (userId) => {
+  const params = new URLSearchParams();
+  params.append("userId", userId);
+  const url = `${BASE_URL}/candidate/getCandidateInformation?${params.toString()}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
+};
+
 const registerCanidate = (data) => {};
 
-export { authenticateCandidate, registerCanidate };
+export {
+  authenticateCandidate,
+  registerCanidate,
+  getCandidateInformation,
+};

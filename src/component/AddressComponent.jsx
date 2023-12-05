@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Box } from "@mui/material";
 
-export default function AddressComponent({ setUserAddress }) {
+export default function AddressComponent({ userAddress, setUserAddress }) {
   return (
     <Box>
       <Typography
@@ -23,12 +23,14 @@ export default function AddressComponent({ setUserAddress }) {
             fullWidth
             id="streetNo"
             label="Street Number"
+            value={userAddress?.streetNo || ""}
             onChange={(e) =>
               setUserAddress(
-                (addressData) => (addressData={...addressData,streetNo: e.target.value})
+                (addressData) =>
+                  (addressData = { ...addressData, streetNo: e.target.value })
               )
             }
-            autoFocus
+            // autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -39,12 +41,14 @@ export default function AddressComponent({ setUserAddress }) {
             fullWidth
             id="streetName"
             label="Street Name"
+            value={userAddress?.streetName || ""}
             onChange={(e) =>
               setUserAddress(
-                (addressData) => (addressData={...addressData,streetName: e.target.value})
+                (addressData) =>
+                  (addressData = { ...addressData, streetName: e.target.value })
               )
             }
-            autoFocus
+            // autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -55,12 +59,14 @@ export default function AddressComponent({ setUserAddress }) {
             fullWidth
             id="city"
             label="City"
+            value={userAddress?.city || ""}
             onChange={(e) =>
               setUserAddress(
-                (addressData) => (addressData={...addressData,city: e.target.value})
+                (addressData) =>
+                  (addressData = { ...addressData, city: e.target.value })
               )
             }
-            autoFocus
+            // autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -71,12 +77,14 @@ export default function AddressComponent({ setUserAddress }) {
             fullWidth
             id="state"
             label="State"
+            value={userAddress?.state || ""}
             onChange={(e) =>
               setUserAddress(
-                (addressData) => (addressData={...addressData,state: e.target.value})
+                (addressData) =>
+                  (addressData = { ...addressData, state: e.target.value })
               )
             }
-            autoFocus
+            // autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -87,12 +95,14 @@ export default function AddressComponent({ setUserAddress }) {
             fullWidth
             id="country"
             label="country"
+            value={userAddress?.country || ""}
             onChange={(e) =>
               setUserAddress(
-                (addressData) => (addressData={...addressData,country: e.target.value})
+                (addressData) =>
+                  (addressData = { ...addressData, country: e.target.value })
               )
             }
-            autoFocus
+            // autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -103,12 +113,14 @@ export default function AddressComponent({ setUserAddress }) {
             fullWidth
             id="zipcode"
             label="Zipcode"
+            value={userAddress?.zipcode || ""}
             onChange={(e) =>
               setUserAddress(
-                (addressData) => (addressData={...addressData,zipcode: e.target.value})
+                (addressData) =>
+                  (addressData = { ...addressData, zipcode: e.target.value })
               )
             }
-            autoFocus
+            // autoFocus
           />
         </Grid>
       </Grid>

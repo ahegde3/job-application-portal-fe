@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -18,7 +18,7 @@ import WorkExperienceComponent from "../component/WorkExperienceComponent";
 import DiversityComponent from "../component/DiversityComponent";
 import { CANDIDATE } from "../constant/constants";
 import { registerCompany } from "../api/company";
-import { registerCanidate } from "../api/candidate";
+import { registerCanidate, getCandidateInformation } from "../api/candidate";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -45,15 +45,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Registration() {
+export default function UpdateProfile() {
+
   const [userInformation, setUserInformation] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
   const [educationInformation, setEducationInformation] = useState([]);
   const [workExperienceInformation, setWorkExperienceInformation] = useState(
     []
   );
+  const [diversityInformation, setDiversityInformation] = useState(null);
 
-  const userType = useLocation()?.state.userType;
+  const userType = localStorage.getItem("userType");
 
   const classes = useStyles();
   const navigate = useNavigate();
@@ -64,13 +66,28 @@ export default function Registration() {
   ];
 
   const candidateRegistrationComponent = [
-    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
-    <AddressComponent setUserAddress={setUserAddress} />,
-    <EducationComponent setEducationInformation={setEducationInformation} />,
+    <UserDetail
+      userType={userType}
+      userInformation={userInformation}
+      setUserInformation={setUserInformation}
+      isUpdate={true}
+    />,
+    <AddressComponent
+      userAddress={userAddress}
+      setUserAddress={setUserAddress}
+    />,
+    <EducationComponent
+      educationInformation={educationInformation}
+      setEducationInformation={setEducationInformation}
+    />,
     <WorkExperienceComponent
+      workExperienceInformation={workExperienceInformation}
       setWorkExperienceInformation={setWorkExperienceInformation}
     />,
-    <DiversityComponent />,
+    <DiversityComponent
+      diversityInformation={diversityInformation}
+      setDiversityInformation={setDiversityInformation}
+    />,
   ];
   const registrationInformationComponents =
     userType === CANDIDATE
@@ -87,12 +104,12 @@ export default function Registration() {
         workExperienceInformation.length > 0
       ) {
       }
-      // registerCanidate({
-      //   ...userInformation,
-      //   ...userAddress,
-      //   ...educationInformation,
-      //   ...workExperienceInformation,
-      // });
+      registerCanidate({
+        ...userInformation,
+        ...userAddress,
+        ...educationInformation,
+        ...workExperienceInformation,
+      });
       navigate("/home");
     } else {
       const userData = {
@@ -100,12 +117,27 @@ export default function Registration() {
         ...userAddress,
       };
       registerCompany(userData).then(() => navigate("/home"));
-      //TODO: FOr error show some toast
+      //TODO: For error show some toast
     }
   };
 
+  useEffect(() => {
+    getCandidateInformation(localStorage.getItem("userId")).then((res) => {
+      console.log(res);
+      setUserInformation(res[0].userInformation);
+      setUserAddress(res[0].userAddress);
+      setEducationInformation(res[0].educationInfo);
+      setWorkExperienceInformation(res[0].workExperienceInfo);
+    });
+  }, [userType]);
+
   return (
     <Container component="main" maxWidth="xs">
+      {/* {console.log(
+        userInformation,
+        workExperienceInformation,
+        educationInformation
+      )} */}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

@@ -38,7 +38,9 @@ export default function Navbar() {
         TransitionComponent={Fade}
         style={{ marginTop: "36px" }}
       >
-        <MenuItem onClick={handleClose}>Update Profile</MenuItem>
+        <MenuItem onClick={() => navigate("/updateProfile")}>
+          Update Profile
+        </MenuItem>
         <MenuItem
           onClick={() => {
             localStorage.removeItem("isLogged");

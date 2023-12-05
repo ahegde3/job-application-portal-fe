@@ -5,8 +5,13 @@ import Typography from "@material-ui/core/Typography";
 import { Box } from "@mui/material";
 import ColoredLine from "./ColoredLine";
 
-export default function EducationComponent({ setEducationInformation }) {
-  const [count, setCount] = useState(1);
+export default function EducationComponent({
+  educationInformation,
+  setEducationInformation,
+}) {
+ // console.log("count educations", educationInformation);
+  const [count, setCount] = useState(educationInformation?.length ?? 1);
+  console.log(count);
 
   return (
     <Box>
@@ -20,8 +25,10 @@ export default function EducationComponent({ setEducationInformation }) {
 
       {[...Array(count)].map((_, index) => (
         <EducationDetailsComponent
+          key={index}
           position={index}
           setCount={setCount}
+          educationInformation={educationInformation}
           setEducationInformation={setEducationInformation}
         />
       ))}
@@ -44,6 +51,7 @@ export default function EducationComponent({ setEducationInformation }) {
 const EducationDetailsComponent = ({
   position,
   setCount,
+  educationInformation,
   setEducationInformation,
 }) => {
   const setEducationValues = (key, value, position) => {
@@ -73,6 +81,8 @@ const EducationDetailsComponent = ({
           fullWidth
           id="university"
           label="University"
+          value={educationInformation?.[position].universityName || ""}
+
           onChange={(e) =>
             setEducationValues("university", e.target.value, position)
           }
@@ -86,6 +96,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="degreeType"
           label="Degree Type"
+          value={educationInformation?.[position].degree || ""}
           onChange={(e) =>
             setEducationValues("degreeType", e.target.value, position)
           }
@@ -99,6 +110,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="country"
           label="Country"
+          value={educationInformation?.[position].country || ""}
           onChange={(e) =>
             setEducationValues("country", e.target.value, position)
           }
@@ -112,6 +124,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="major"
           label="Major"
+          value={educationInformation?.[position].major || ""}
           onChange={(e) =>
             setEducationValues("major", e.target.value, position)
           }
@@ -125,6 +138,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="gpa"
           label="GPA"
+          value={educationInformation?.[position].gpa || ""}
           onChange={(e) => setEducationValues("gpa", e.target.value, position)}
           autoFocus
         />
@@ -136,6 +150,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="startDate"
           label="Start Date"
+          value={educationInformation?.[position].startDate || ""}
           onChange={(e) =>
             setEducationValues("startDate", e.target.value, position)
           }
@@ -149,6 +164,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="endDate"
           label="End Date"
+          value={educationInformation?.[position].endDate || ""}
           onChange={(e) =>
             setEducationValues("endDate", e.target.value, position)
           }
@@ -171,5 +187,3 @@ const EducationDetailsComponent = ({
     </Grid>
   );
 };
-
-
