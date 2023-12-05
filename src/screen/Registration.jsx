@@ -15,8 +15,10 @@ import UserDetail from "../component/UserDetail";
 import AddressComponent from "../component/AddressComponent";
 import EducationComponent from "../component/EducationComponent";
 import WorkExperienceComponent from "../component/WorkExperienceComponent";
+import DiversityComponent from "../component/DiversityComponent";
 import { CANDIDATE } from "../constant/constants";
 import { registerCompany } from "../api/company";
+import { registerCanidate } from "../api/candidate";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -46,7 +48,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Registration() {
   const [userInformation, setUserInformation] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
-  const [educationInformation, setEducationInformation] = useState(null);
+  const [educationInformation, setEducationInformation] = useState([]);
+  const [workExperienceInformation, setWorkExperienceInformation] = useState(
+    []
+  );
 
   const userType = useLocation()?.state.userType;
 
@@ -59,10 +64,13 @@ export default function Registration() {
   ];
 
   const candidateRegistrationComponent = [
-    <UserDetail userType={userType} />,
-    <AddressComponent />,
-    <EducationComponent />,
-    <WorkExperienceComponent />,
+    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
+    <AddressComponent setUserAddress={setUserAddress} />,
+    <EducationComponent setEducationInformation={setEducationInformation} />,
+    <WorkExperienceComponent
+      setWorkExperienceInformation={setWorkExperienceInformation}
+    />,
+    <DiversityComponent />,
   ];
   const registrationInformationComponents =
     userType === CANDIDATE
@@ -71,8 +79,21 @@ export default function Registration() {
   const [currentComponentIndex, setcurrentComponentIndex] = useState(0);
 
   const onSubmit = () => {
-    console.log("inside on submit");
     if (userType === CANDIDATE) {
+      if (
+        userInformation != null &&
+        userAddress != null &&
+        educationInformation.length > 0 &&
+        workExperienceInformation.length > 0
+      ) { 
+      }
+      // registerCanidate({
+      //   ...userInformation,
+      //   ...userAddress,
+      //   ...educationInformation,
+      //   ...workExperienceInformation,
+      // });
+      navigate("/home")
     } else {
       const userData = {
         ...userInformation,
@@ -85,6 +106,7 @@ export default function Registration() {
 
   return (
     <Container component="main" maxWidth="xs">
+      {console.log("educationInformation", workExperienceInformation)}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

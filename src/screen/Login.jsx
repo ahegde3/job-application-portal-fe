@@ -29,7 +29,7 @@ import { CANDIDATE, COMPANY } from "../constant/constants";
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const [currentTab, setCurrentTab] = useState("CANDIDATE");
+  const [currentTab, setCurrentTab] = useState(CANDIDATE);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -135,6 +135,12 @@ export default function Login() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={() =>
+                    navigate("/home", {
+                      replace: true,
+                      state: { userType: currentTab },
+                    })
+                  }
                 >
                   Sign In
                 </Button>

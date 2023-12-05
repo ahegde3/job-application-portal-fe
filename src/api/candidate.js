@@ -16,4 +16,6 @@ const authenticateCandidate = (email, password) => {
   });
 };
 
-export { authenticateCandidate };
+const registerCanidate = (data) => {};
+
+export { authenticateCandidate, registerCanidate };
