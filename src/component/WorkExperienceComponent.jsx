@@ -79,7 +79,7 @@ const WorkexperienceDetailComponent = ({
           fullWidth
           id="position"
           label="Position"
-          value={workExperienceInformation?.[position].position || ""}
+          value={workExperienceInformation?.[position].position}
           onChange={(e) =>
             setWorkExperienceValues("position", e.target.value, position)
           }
@@ -93,7 +93,7 @@ const WorkexperienceDetailComponent = ({
           fullWidth
           id="organization"
           label="Organization"
-          value={workExperienceInformation?.[position].organizationName || ""}
+          value={workExperienceInformation?.[position].organizationName}
           onChange={(e) =>
             setWorkExperienceValues("organization", e.target.value, position)
           }
@@ -107,7 +107,7 @@ const WorkexperienceDetailComponent = ({
           fullWidth
           id="responsibilities"
           label="Responsibilites"
-          value={workExperienceInformation?.[position].responsibilities || ""}
+          value={workExperienceInformation?.[position].responsibilities}
           onChange={(e) =>
             setWorkExperienceValues(
               "responsibilities",
@@ -127,7 +127,7 @@ const WorkexperienceDetailComponent = ({
               fullWidth
               id="startDate"
               label="Start Date"
-              value={workExperienceInformation?.[position].startDate || ""}
+              value={workExperienceInformation?.[position].startDate}
               onChange={(e) =>
                 setWorkExperienceValues("startDate", e.target.value, position)
               }
@@ -141,7 +141,7 @@ const WorkexperienceDetailComponent = ({
               fullWidth
               id="endDate"
               label="End Date"
-              value={workExperienceInformation?.[position].endDate || ""}
+              value={workExperienceInformation?.[position].endDate}
               onChange={(e) =>
                 setWorkExperienceValues("endDate", e.target.value, position)
               }
@@ -157,7 +157,7 @@ const WorkexperienceDetailComponent = ({
             fullWidth
             id="startDate"
             label="Start Date"
-            value={workExperienceInformation?.[position].startDate || ""}
+            value={workExperienceInformation?.[position].startDate}
             onChange={(e) =>
               setWorkExperienceValues("startDate", e.target.value, position)
             }

@@ -33,10 +33,28 @@ const getCandidateInformation = (userId) => {
   });
 };
 
-const registerCanidate = (data) => {};
-
-export {
-  authenticateCandidate,
-  registerCanidate,
-  getCandidateInformation,
+const registerCanidate = (
+  candidateInformation,
+  educationInformation,
+  workExperienceInformation
+) => {
+  const url = `${BASE_URL}/candidate/registerCandidate`;
+  return fetch(url, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify({
+      candidateInformation,
+      educationInformation,
+      workExperienceInformation,
+    }),
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
 };
+
+export { authenticateCandidate, registerCanidate, getCandidateInformation };

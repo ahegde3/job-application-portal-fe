@@ -23,7 +23,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
             fullWidth
             id="streetNo"
             label="Street Number"
-            value={userAddress?.streetNo || ""}
+            value={userAddress?.streetNo}
             onChange={(e) =>
               setUserAddress(
                 (addressData) =>
@@ -41,7 +41,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
             fullWidth
             id="streetName"
             label="Street Name"
-            value={userAddress?.streetName || ""}
+            value={userAddress?.streetName}
             onChange={(e) =>
               setUserAddress(
                 (addressData) =>
@@ -59,7 +59,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
             fullWidth
             id="city"
             label="City"
-            value={userAddress?.city || ""}
+            value={userAddress?.city}
             onChange={(e) =>
               setUserAddress(
                 (addressData) =>
@@ -77,7 +77,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
             fullWidth
             id="state"
             label="State"
-            value={userAddress?.state || ""}
+            value={userAddress?.state}
             onChange={(e) =>
               setUserAddress(
                 (addressData) =>
@@ -95,7 +95,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
             fullWidth
             id="country"
             label="country"
-            value={userAddress?.country || ""}
+            value={userAddress?.country}
             onChange={(e) =>
               setUserAddress(
                 (addressData) =>
@@ -113,7 +113,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
             fullWidth
             id="zipcode"
             label="Zipcode"
-            value={userAddress?.zipcode || ""}
+            value={userAddress?.zipcode}
             onChange={(e) =>
               setUserAddress(
                 (addressData) =>

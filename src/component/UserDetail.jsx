@@ -45,8 +45,13 @@ export default function UserDetail({
               fullWidth
               id="firstName"
               label="First Name"
-              value={userInformation?.firstName || ""}
-              autoFocus
+              value={userInformation?.firstName}
+              onChange={(e) =>
+                setUserInformation(
+                  (userData) =>
+                    (userData = { ...userData, firstName: e.target.value })
+                )
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -57,7 +62,13 @@ export default function UserDetail({
               id="lastName"
               label="Last Name"
               name="lastName"
-              value={userInformation?.lastName || ""}
+              value={userInformation?.lastName}
+              onChange={(e) =>
+                setUserInformation(
+                  (userData) =>
+                    (userData = { ...userData, lastName: e.target.value })
+                )
+              }
               autoComplete="lname"
             />
           </Grid>
@@ -69,7 +80,13 @@ export default function UserDetail({
               id="email"
               label="Email Address"
               name="email"
-              value={userInformation?.emailId || ""}
+              value={userInformation?.emailId}
+              onChange={(e) =>
+                setUserInformation(
+                  (userData) =>
+                    (userData = { ...userData, emailId: e.target.value })
+                )
+              }
               autoComplete="email"
             />
           </Grid>
@@ -81,6 +98,12 @@ export default function UserDetail({
               id="phoneNo"
               label="Phone Number"
               name="phoneNo"
+              onChange={(e) =>
+                setUserInformation(
+                  (userData) =>
+                    (userData = { ...userData, phoneNo: e.target.value })
+                )
+              }
             />
           </Grid>
           <Grid item xs={12}>
@@ -92,7 +115,13 @@ export default function UserDetail({
               label="Password"
               type="password"
               id="password"
-              value={userInformation?.password || ""}
+              value={userInformation?.password}
+              onChange={(e) =>
+                setUserInformation(
+                  (userData) =>
+                    (userData = { ...userData, password: e.target.value })
+                )
+              }
               autoComplete="current-password"
             />
           </Grid>

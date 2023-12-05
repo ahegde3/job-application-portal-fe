@@ -52,7 +52,7 @@ export default function Registration() {
   const [workExperienceInformation, setWorkExperienceInformation] = useState(
     []
   );
-
+  const [diversityInformation, setDiversityInformation] = useState(null);
   const userType = useLocation()?.state.userType;
 
   const classes = useStyles();
@@ -70,7 +70,7 @@ export default function Registration() {
     <WorkExperienceComponent
       setWorkExperienceInformation={setWorkExperienceInformation}
     />,
-    <DiversityComponent />,
+    <DiversityComponent setDiversityInformation={setDiversityInformation} />,
   ];
   const registrationInformationComponents =
     userType === CANDIDATE
@@ -87,12 +87,11 @@ export default function Registration() {
         workExperienceInformation.length > 0
       ) {
       }
-      // registerCanidate({
-      //   ...userInformation,
-      //   ...userAddress,
-      //   ...educationInformation,
-      //   ...workExperienceInformation,
-      // });
+      registerCanidate(
+        { ...userInformation, ...userAddress, ...diversityInformation },
+        educationInformation,
+        workExperienceInformation
+      );
       navigate("/home");
     } else {
       const userData = {

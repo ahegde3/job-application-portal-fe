@@ -7,9 +7,13 @@ import FormLabel from "@mui/material/FormLabel";
 
 import React from "react";
 
-export default function DiversityComponent() {
+export default function DiversityComponent({ setDiversityInformation }) {
   const diversityOptions = [
-    { title: "Gender Identity⁠ :", options: ["Male", "Female", "Others"] },
+    {
+      title: "Gender Identity⁠ :",
+      options: ["Male", "Female", "Others"],
+      columValue: "gender",
+    },
     {
       title: "Race/Ethnicity⁠ :",
       options: [
@@ -21,10 +25,17 @@ export default function DiversityComponent() {
         "White (Not Hispanic or Latino)",
         "I don't wish to answer",
       ],
+      columValue: "ethnicity",
     },
     {
       title: "Veteran Status⁠ :",
       options: ["Yes", "No", "I don't wish to answer"],
+      columValue: "veteran_status",
+    },
+    {
+      title: "Do you have any disability or had one in the past⁠ :",
+      options: ["Yes", "No", "I don't wish to answer"],
+      columValue: "disability_status",
     },
   ];
   return (
@@ -56,6 +67,18 @@ export default function DiversityComponent() {
                 <FormControlLabel
                   key={key2}
                   value={option}
+                  onClick={(e) => {
+                    console.log(group.columValue, e.target.value);
+                    setDiversityInformation((prevValue) => {
+                      return {
+                        ...prevValue,
+                        [group.columValue]: e.target.value,
+                      };
+                      // console.log(prevValue);
+                      // if (prevValue === undefined) prevValue = {};
+                      // prevValue[group.columValue] = e.target.value;
+                    });
+                  }}
                   control={<Radio />}
                   label={option}
                 />
