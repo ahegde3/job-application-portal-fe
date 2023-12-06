@@ -7,9 +7,11 @@ import Box from "@mui/material/Box";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
+import { CANDIDATE } from "../constant/constants";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const userType = localStorage.getItem("userType");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -41,9 +43,11 @@ export default function Navbar() {
         <MenuItem onClick={() => navigate("/updateProfile")}>
           Update Profile
         </MenuItem>
-        <MenuItem onClick={() => navigate("/reviewAppliedJobs")}>
-          View Applied Jobs
-        </MenuItem>
+        {userType === CANDIDATE && (
+          <MenuItem onClick={() => navigate("/reviewAppliedJobs")}>
+            View Applied Jobs
+          </MenuItem>
+        )}
         <MenuItem
           onClick={() => {
             localStorage.removeItem("isLogged");

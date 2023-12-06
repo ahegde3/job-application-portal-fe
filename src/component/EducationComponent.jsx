@@ -9,7 +9,7 @@ export default function EducationComponent({
   educationInformation,
   setEducationInformation,
 }) {
-  // console.log("count educations", educationInformation);
+  console.log("count educations", educationInformation);
   const [count, setCount] = useState(educationInformation?.length ?? 1);
   console.log(count);
 
@@ -81,7 +81,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="university"
           label="University"
-          value={educationInformation?.[position].universityName}
+          value={educationInformation?.[position]?.universityName}
           onChange={(e) =>
             setEducationValues("university", e.target.value, position)
           }
@@ -95,7 +95,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="degreeType"
           label="Degree Type"
-          value={educationInformation?.[position].degree}
+          value={educationInformation?.[position]?.degree}
           onChange={(e) =>
             setEducationValues("degreeType", e.target.value, position)
           }
@@ -109,7 +109,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="country"
           label="Country"
-          value={educationInformation?.[position].country}
+          value={educationInformation?.[position]?.country}
           onChange={(e) =>
             setEducationValues("country", e.target.value, position)
           }
@@ -123,7 +123,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="major"
           label="Major"
-          value={educationInformation?.[position].major}
+          value={educationInformation?.[position]?.major}
           onChange={(e) =>
             setEducationValues("major", e.target.value, position)
           }
@@ -137,7 +137,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="gpa"
           label="GPA"
-          value={educationInformation?.[position].gpa}
+          value={educationInformation?.[position]?.gpa}
           onChange={(e) => setEducationValues("gpa", e.target.value, position)}
           autoFocus
         />
@@ -149,7 +149,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="startDate"
           label="Start Date"
-          value={educationInformation?.[position].startDate}
+          value={educationInformation?.[position]?.startDate}
           onChange={(e) =>
             setEducationValues("startDate", e.target.value, position)
           }
@@ -163,7 +163,7 @@ const EducationDetailsComponent = ({
           fullWidth
           id="endDate"
           label="End Date"
-          value={educationInformation?.[position].endDate}
+          value={educationInformation?.[position]?.endDate}
           onChange={(e) =>
             setEducationValues("endDate", e.target.value, position)
           }
