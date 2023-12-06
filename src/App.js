@@ -24,6 +24,7 @@ function App() {
         <Route path="/reviewAppliedJobs" element={<ReviewAppliedJobs />} />
       </Routes>
     </BrowserRouter>
+    
   );
 }
 

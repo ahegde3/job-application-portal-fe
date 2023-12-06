@@ -60,8 +60,8 @@ export default function UpdateProfile() {
   const navigate = useNavigate();
 
   const companyRegistrationComponent = [
-    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
-    <AddressComponent setUserAddress={setUserAddress} />,
+    <UserDetail userType={userType} setUserInformation={setUserInformation} userInformation={userInformation} />,
+    <AddressComponent  userAddress={userAddress} setUserAddress={setUserAddress} />,
   ];
 
   const candidateRegistrationComponent = [
@@ -139,14 +139,15 @@ const setInformation = (res)=>{
   else{
    
     setUserInformation(res);
+    setUserAddress({streetNo:res.streetNo, streetName:res.streetName, city: res.city, state: res.state, country: res.country, zipcode: res.zipcode});
   }
 }
 
   return (
     <Container component="main" maxWidth="xs">
-      {console.log(
+      {/* {console.log(
         userInformation
-      )}
+      )} */}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
