@@ -82,10 +82,24 @@ const getAppliedJobsForCandidate = (candidateId) => {
   });
 };
 
+const createNewJobOpening = (jobData, companyId) => {
+  const url = `${BASE_URL}/jobs/createNewJobOpening`;
+  return fetch(url, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify({ jobData, companyId }),
+  });
+};
+
 export {
   searchJobsByKeyword,
   getJobOpeningDetails,
   getJobApplicationQuestions,
   applyForJob,
   getAppliedJobsForCandidate,
+  createNewJobOpening,
 };
