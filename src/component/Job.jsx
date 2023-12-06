@@ -5,7 +5,15 @@ import CardContent from "@material-ui/core/CardContent";
 
 export default function Job(job) {
   const navigate = useNavigate();
-  return (
+  return job.applied ? (
+    <Card>
+      <CardContent>
+        <p>{job.title}</p>
+        <p>Company Name : {job.companyName}</p>
+        <p> Status:{job.status}</p>
+      </CardContent>
+    </Card>
+  ) : (
     <Card
       style={{ marginTop: "10px", borderRadius: "10px", cursor: "pointer" }}
       onClick={() => {

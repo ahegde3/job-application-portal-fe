@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Registration from "./screen/Registration";
 import UpdateProfile from "./screen/UpdateProfile";
+import ReviewAppliedJobs from "./screen/ReviewAppliedJobs";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/opening" element={<Opening />} />
         <Route path="/updateProfile" element={<UpdateProfile />} />
+        <Route path="/reviewAppliedJobs" element={<ReviewAppliedJobs />} />
       </Routes>
     </BrowserRouter>
   );

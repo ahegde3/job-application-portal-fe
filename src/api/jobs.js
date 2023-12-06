@@ -52,6 +52,7 @@ const getJobApplicationQuestions = (jobId) => {
 };
 
 const applyForJob = (candidateId, jobId, answers) => {
+  console.log(candidateId, jobId, answers);
   const url = `${BASE_URL}/jobs/applyForJobs`;
   return fetch(url, {
     method: "POST",
@@ -61,6 +62,20 @@ const applyForJob = (candidateId, jobId, answers) => {
       accept: "*/*",
     },
     body: JSON.stringify({ candidateId, jobId, answers }),
+  });
+};
+
+const getAppliedJobsForCandidate = (candidateId) => {
+  const params = new URLSearchParams();
+  params.append("candidateId", candidateId);
+  const url = `${BASE_URL}/jobs/getAppliedJobsForCandidate?${params.toString()}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
   }).then((result) => {
     if (result.ok) return result.json();
     else return undefined;
@@ -72,4 +87,5 @@ export {
   getJobOpeningDetails,
   getJobApplicationQuestions,
   applyForJob,
+  getAppliedJobsForCandidate,
 };

@@ -41,6 +41,9 @@ export default function Navbar() {
         <MenuItem onClick={() => navigate("/updateProfile")}>
           Update Profile
         </MenuItem>
+        <MenuItem onClick={() => navigate("/reviewAppliedJobs")}>
+          View Applied Jobs
+        </MenuItem>
         <MenuItem
           onClick={() => {
             localStorage.removeItem("isLogged");

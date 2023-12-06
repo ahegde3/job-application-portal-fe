@@ -10,7 +10,7 @@ export default function JobApplication({ jobId, applicationQuestions }) {
 
   const applyToJob = () => {
     const candidateId = localStorage.getItem("userId");
-    applyForJob({ candidateId, jobId, answers });
+    applyForJob( candidateId, jobId, answers );
   };
   // const applicationQuestions = [
   //   { appQuestionDesc: "Why do you want to work with us?" },
