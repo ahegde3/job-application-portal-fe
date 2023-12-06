@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UpdateProfile() {
-
   const [userInformation, setUserInformation] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
   const [educationInformation, setEducationInformation] = useState([]);
@@ -104,12 +103,11 @@ export default function UpdateProfile() {
         workExperienceInformation.length > 0
       ) {
       }
-      registerCanidate({
-        ...userInformation,
-        ...userAddress,
-        ...educationInformation,
-        ...workExperienceInformation,
-      });
+      registerCanidate(
+        { ...userInformation, ...userAddress, ...diversityInformation },
+        educationInformation,
+        workExperienceInformation
+      );
       navigate("/home");
     } else {
       const userData = {

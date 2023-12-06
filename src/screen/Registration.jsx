@@ -64,13 +64,27 @@ export default function Registration() {
   ];
 
   const candidateRegistrationComponent = [
-    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
-    <AddressComponent setUserAddress={setUserAddress} />,
-    <EducationComponent setEducationInformation={setEducationInformation} />,
+    <UserDetail
+      userType={userType}
+      userInformation={userInformation}
+      setUserInformation={setUserInformation}
+    />,
+    <AddressComponent
+      userAddress={userAddress}
+      setUserAddress={setUserAddress}
+    />,
+    <EducationComponent
+      educationInformation={educationInformation}
+      setEducationInformation={setEducationInformation}
+    />,
     <WorkExperienceComponent
+      workExperienceInformation={workExperienceInformation}
       setWorkExperienceInformation={setWorkExperienceInformation}
     />,
-    <DiversityComponent setDiversityInformation={setDiversityInformation} />,
+    <DiversityComponent
+      diversityInformation={diversityInformation}
+      setDiversityInformation={setDiversityInformation}
+    />,
   ];
   const registrationInformationComponents =
     userType === CANDIDATE

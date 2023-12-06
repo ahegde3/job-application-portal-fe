@@ -38,7 +38,6 @@ export default function UserDetail({
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
-              autoComplete="fname"
               name="firstName"
               variant="outlined"
               required
@@ -98,6 +97,7 @@ export default function UserDetail({
               id="phoneNo"
               label="Phone Number"
               name="phoneNo"
+              value={userInformation?.phoneNo}
               onChange={(e) =>
                 setUserInformation(
                   (userData) =>
@@ -177,6 +177,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           id="phoneNo"
           label="Phone Number"
           name="phoneNo"
+          // value={userInformation?.phoneNo}
           onChange={(e) =>
             setUserInformation(
               (userData) =>
