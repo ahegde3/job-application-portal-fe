@@ -82,7 +82,10 @@ export default function Opening() {
           Apply to this Job
         </Button>
       ) : (
-        <JobApplication applicationQuestions={applicationQuestions} />
+        <JobApplication
+          jobId={jobId}
+          applicationQuestions={applicationQuestions}
+        />
       )}
     </div>
   );
