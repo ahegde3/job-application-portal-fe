@@ -16,6 +16,23 @@ const authenticateCompany = (email, password) => {
   });
 };
 
+const getCompanyInformation = (userId) => {
+  const params = new URLSearchParams();
+  params.append("userId", userId);
+  const url = `${BASE_URL}/company/getCompanyInformation?${params.toString()}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
+};
+
 const registerCompany = (userData) => {
   
   const url = `${BASE_URL}/company/registerCompany`;
@@ -27,10 +44,7 @@ const registerCompany = (userData) => {
       accept: "*/*",
     },
     body: JSON.stringify({userData }),
-  }).then((result) => {
-    if (result.ok) return result.json();
-    else return undefined;
-  });
+  })
 };
 
-export { authenticateCompany,registerCompany };
+export { authenticateCompany, registerCompany, getCompanyInformation };

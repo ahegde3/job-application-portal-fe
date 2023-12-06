@@ -33,7 +33,7 @@ export default function UserDetail({
         {userType} Information
       </Typography>
       {userType === COMPANY ? (
-        <CompanyInformationComponent setUserInformation={setUserInformation} />
+        <CompanyInformationComponent userInformation ={userInformation} setUserInformation={setUserInformation} />
       ) : (
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -131,7 +131,8 @@ export default function UserDetail({
   );
 }
 
-const CompanyInformationComponent = ({ setUserInformation }) => {
+const CompanyInformationComponent = ({ userInformation,setUserInformation }) => {
+  console.log(userInformation);
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -143,6 +144,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           fullWidth
           id="companyName"
           label="Company Name"
+          value={userInformation?.companyName}
           onChange={(e) =>
             setUserInformation(
               (userData) =>
@@ -160,6 +162,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           id="email"
           label="Email Address"
           name="email"
+          value={userInformation?.companyEmailId}
           autoComplete="email"
           onChange={(e) =>
             setUserInformation(
@@ -177,7 +180,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           id="phoneNo"
           label="Phone Number"
           name="phoneNo"
-          // value={userInformation?.phoneNo}
+          value={userInformation?.companyPhoneNo}
           onChange={(e) =>
             setUserInformation(
               (userData) =>
@@ -196,6 +199,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           id="companyDesc"
           label="About the company"
           name="companyDesc"
+          value={userInformation?.companyDesc}
           onChange={(e) =>
             setUserInformation(
               (userData) =>
@@ -212,6 +216,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           id="industry"
           label="Industry to which the org belongs"
           name="industry"
+          value={userInformation?.industry}
           onChange={(e) =>
             setUserInformation(
               (userData) =>
@@ -229,6 +234,7 @@ const CompanyInformationComponent = ({ setUserInformation }) => {
           label="Password"
           type="password"
           id="password"
+          value={userInformation?.password}
           autoComplete="current-password"
           onChange={(e) =>
             setUserInformation(

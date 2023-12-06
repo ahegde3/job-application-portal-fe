@@ -59,8 +59,12 @@ export default function Registration() {
   const navigate = useNavigate();
 
   const companyRegistrationComponent = [
-    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
-    <AddressComponent setUserAddress={setUserAddress} />,
+    <UserDetail userType={userType} 
+    userInformation={userInformation}
+    setUserInformation={setUserInformation} />,
+    <AddressComponent 
+    userAddress={userAddress}
+    setUserAddress={setUserAddress} />,
   ];
 
   const candidateRegistrationComponent = [
@@ -106,15 +110,17 @@ export default function Registration() {
         educationInformation,
         workExperienceInformation
       );
-      navigate("/home");
+    
     } else {
       const userData = {
         ...userInformation,
         ...userAddress,
       };
-      registerCompany(userData).then(() => navigate("/home"));
+      registerCompany(userData);
+      
       //TODO: FOr error show some toast
     }
+    navigate("/login");
   };
 
   return (

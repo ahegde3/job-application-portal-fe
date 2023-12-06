@@ -17,7 +17,7 @@ import EducationComponent from "../component/EducationComponent";
 import WorkExperienceComponent from "../component/WorkExperienceComponent";
 import DiversityComponent from "../component/DiversityComponent";
 import { CANDIDATE } from "../constant/constants";
-import { registerCompany } from "../api/company";
+import { registerCompany,getCompanyInformation } from "../api/company";
 import { registerCanidate, getCandidateInformation } from "../api/candidate";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,8 +60,8 @@ export default function UpdateProfile() {
   const navigate = useNavigate();
 
   const companyRegistrationComponent = [
-    <UserDetail userType={userType} setUserInformation={setUserInformation} />,
-    <AddressComponent setUserAddress={setUserAddress} />,
+    <UserDetail userType={userType} setUserInformation={setUserInformation} userInformation={userInformation} />,
+    <AddressComponent  userAddress={userAddress} setUserAddress={setUserAddress} />,
   ];
 
   const candidateRegistrationComponent = [
@@ -120,21 +120,33 @@ export default function UpdateProfile() {
   };
 
   useEffect(() => {
-    getCandidateInformation(localStorage.getItem("userId")).then((res) => {
-      console.log(res);
-      setUserInformation(res[0].userInformation);
-      setUserAddress(res[0].userAddress);
-      setEducationInformation(res[0].educationInfo);
-      setWorkExperienceInformation(res[0].workExperienceInfo);
-    });
+    console.log(localStorage.getItem("userId"))
+    if(userType === CANDIDATE){
+    getCandidateInformation(localStorage.getItem("userId")).then((res) =>setInformation(res) );
+  }
+  else getCompanyInformation(localStorage.getItem("userId")).then(res=>setInformation(res))
   }, [userType]);
+
+
+const setInformation = (res)=>{
+
+  if(userType === CANDIDATE){
+    setUserInformation(res[0].userInformation);
+    setUserAddress(res[0].userAddress);
+  setEducationInformation(res[0].educationInfo);
+  setWorkExperienceInformation(res[0].workExperienceInfo);
+  }
+  else{
+   
+    setUserInformation(res);
+    setUserAddress({streetNo:res.streetNo, streetName:res.streetName, city: res.city, state: res.state, country: res.country, zipcode: res.zipcode});
+  }
+}
 
   return (
     <Container component="main" maxWidth="xs">
       {/* {console.log(
-        userInformation,
-        workExperienceInformation,
-        educationInformation
+        userInformation
       )} */}
       <CssBaseline />
       <div className={classes.paper}>
