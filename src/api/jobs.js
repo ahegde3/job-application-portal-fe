@@ -112,6 +112,23 @@ const getCreatedJobs = (companyId) => {
   });
 };
 
+const deleteThisJob = (jobId) => {
+  const params = new URLSearchParams();
+  params.append("jobId", jobId);
+  const url = `${BASE_URL}/company/deleteOpeningByJobId?${params.toString()}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
+};
+
 export {
   searchJobsByKeyword,
   getJobOpeningDetails,
@@ -119,5 +136,6 @@ export {
   applyForJob,
   getAppliedJobsForCandidate,
   createNewJobOpening,
-  getCreatedJobs
+  getCreatedJobs,
+  deleteThisJob,
 };
