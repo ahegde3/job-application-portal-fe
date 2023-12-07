@@ -51,9 +51,6 @@ const registerCanidate = (
       educationInformation,
       workExperienceInformation,
     }),
-  }).then((result) => {
-    if (result.ok) return result.json();
-    else return undefined;
   });
 };
 

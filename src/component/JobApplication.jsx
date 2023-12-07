@@ -4,18 +4,23 @@ import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import DiversityComponent from "./DiversityComponent";
 import { applyForJob } from "../api/jobs";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function JobApplication({ jobId, applicationQuestions }) {
   const [answers, setAnswers] = useState([]);
+  const navigate = useNavigate();
 
   const applyToJob = () => {
     const candidateId = localStorage.getItem("userId");
-    applyForJob( candidateId, jobId, answers );
+    applyForJob(candidateId, jobId, answers).then(() => {
+      toast.success("Job application successful");
+      setTimeout(() => {
+        navigate("/home");
+      }, 5000); //wait for 5sec
+    });
   };
-  // const applicationQuestions = [
-  //   { appQuestionDesc: "Why do you want to work with us?" },
-  //   { appQuestionDesc: "Why should we hire you?" },
-  // ];
+
   return (
     <div>
       <div>
@@ -51,23 +56,7 @@ export default function JobApplication({ jobId, applicationQuestions }) {
           )
         )}
       </Grid>
-      {/* <Grid>
-        <Button
-          containerElement="label" //resume
-          label="Resume/CV⁠*⁠:"
-        >
-          <input type="file" />
-        </Button>
-      </Grid>
-      <Grid>
-        <Button
-          containerElement="label" // cover letter
-          label="Resume/CV⁠*⁠:"
-        >
-          <input type="file" />
-        </Button>
-      </Grid> */}
-      {/* <DiversityComponent /> */}
+
       <Button
         type="submit"
         fullWidth

@@ -20,10 +20,10 @@ export default function ReviewAppliedJobs() {
   return (
     <div>
       <Navbar />
-      <h2>Applied Jobs</h2>{" "}
+      <h2>Applied Jobs</h2> {console.log(appliedJobs)}
       {appliedJobs?.length > 0
         ? appliedJobs.map((job) => (
-            <Job key={job.title} applied={true} {...job} />
+            <Job key={job.title} applied={true} job={job} unClickable={true} />
           ))
         : null}
     </div>

@@ -7,9 +7,17 @@ export default function SearchComponent() {
   const [jobList, setJobList] = useState([]);
   return (
     <div style={{ top: "50px", margin: "41px", position: "relative" }}>
+      <h4>Search for the job</h4>
       <SearchBox setIsSearched={setIsSearched} setJobList={setJobList} />
       {console.log(jobList?.length)}
-      {jobList?.length > 0 ? <JobList jobs={jobList} /> : null}
+      {isSearched &&
+        (jobList?.length > 0 ? (
+          <JobList jobs={jobList} />
+        ) : (
+          <div>
+            <h3>No Jobs found</h3>
+          </div>
+        ))}
     </div>
   );
 }
