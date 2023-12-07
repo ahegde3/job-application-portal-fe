@@ -10,7 +10,7 @@ export default function EducationComponent({
   setEducationInformation,
 }) {
   console.log("count educations", educationInformation);
-  const [count, setCount] = useState(educationInformation?.length ?? 1);
+  const [count, setCount] = useState(educationInformation?.length>0 ?educationInformation?.length:1);
   console.log(count);
 
   return (

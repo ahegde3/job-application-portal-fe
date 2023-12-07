@@ -51,6 +51,7 @@ export default function UserDetail({
                     (userData = { ...userData, firstName: e.target.value })
                 )
               }
+              autoFocus
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -69,6 +70,7 @@ export default function UserDetail({
                 )
               }
               autoComplete="lname"
+              autoFocus
             />
           </Grid>
           <Grid item xs={12}>
@@ -87,6 +89,7 @@ export default function UserDetail({
                 )
               }
               autoComplete="email"
+              autoFocus
             />
           </Grid>
           <Grid item xs={12}>
@@ -104,6 +107,7 @@ export default function UserDetail({
                     (userData = { ...userData, phoneNo: e.target.value })
                 )
               }
+              autoFocus
             />
           </Grid>
           <Grid item xs={12}>
@@ -123,6 +127,7 @@ export default function UserDetail({
                 )
               }
               autoComplete="current-password"
+              autoFocus
             />
           </Grid>
         </Grid>
@@ -170,6 +175,7 @@ const CompanyInformationComponent = ({ userInformation,setUserInformation }) => 
                 (userData = { ...userData, companyEmailId: e.target.value })
             )
           }
+          autoFocus
         />
       </Grid>
       <Grid item xs={12}>
@@ -187,6 +193,7 @@ const CompanyInformationComponent = ({ userInformation,setUserInformation }) => 
                 (userData = { ...userData, companyPhoneNo: e.target.value })
             )
           }
+          autoFocus
         />
       </Grid>
       <Grid item xs={12}>
@@ -206,6 +213,7 @@ const CompanyInformationComponent = ({ userInformation,setUserInformation }) => 
                 (userData = { ...userData, companyDesc: e.target.value })
             )
           }
+          autoFocus
         />
       </Grid>
       <Grid item xs={12}>
@@ -223,6 +231,7 @@ const CompanyInformationComponent = ({ userInformation,setUserInformation }) => 
                 (userData = { ...userData, industry: e.target.value })
             )
           }
+          autoFocus
         />
       </Grid>
       <Grid item xs={12}>
@@ -242,6 +251,7 @@ const CompanyInformationComponent = ({ userInformation,setUserInformation }) => 
                 (userData = { ...userData, password: e.target.value })
             )
           }
+          autoFocus
         />
       </Grid>
     </Grid>
