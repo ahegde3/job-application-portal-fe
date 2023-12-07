@@ -9,22 +9,23 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Registration from "./screen/Registration";
 import UpdateProfile from "./screen/UpdateProfile";
 import ReviewAppliedJobs from "./screen/ReviewAppliedJobs";
+import CandidateInfo from "./screen/CandidateInfo";
 
 function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
       <Routes>
-      <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/home" element={<Home />} />
         <Route path="/opening" element={<Opening />} />
         <Route path="/updateProfile" element={<UpdateProfile />} />
         <Route path="/reviewAppliedJobs" element={<ReviewAppliedJobs />} />
+        <Route path="/candidateInfo" element={<CandidateInfo />} />
       </Routes>
     </BrowserRouter>
-    
   );
 }
 

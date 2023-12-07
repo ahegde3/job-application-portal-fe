@@ -129,6 +129,36 @@ const deleteThisJob = (jobId) => {
   });
 };
 
+const getCandidatesAppliedForJob = (jobId) => {
+  const params = new URLSearchParams();
+  params.append("jobId", jobId);
+  const url = `${BASE_URL}/jobs/getJobAppliedCandidates?${params.toString()}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
+};
+
+const updateJobApplicationStatus = (jobId, candidateId, status) => {
+  const url = `${BASE_URL}/jobs/updateJobApplicationStatus`;
+  return fetch(url, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify({ jobId, candidateId, status }),
+  });
+};
+
 export {
   searchJobsByKeyword,
   getJobOpeningDetails,
@@ -138,4 +168,6 @@ export {
   createNewJobOpening,
   getCreatedJobs,
   deleteThisJob,
+  getCandidatesAppliedForJob,
+  updateJobApplicationStatus,
 };
