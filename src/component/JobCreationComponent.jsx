@@ -7,6 +7,7 @@ import {
   getCreatedJobs,
   getJobOpeningDetails,
   getJobApplicationQuestions,
+  deleteThisJob,
 } from "../api/jobs";
 import JobList from "./JobList";
 
@@ -24,6 +25,7 @@ export default function JobCreationComponent() {
       {createNewJob || openJobDetail ? (
         <CreateNewJobForm
           setCreateNewJob={setCreateNewJob}
+          setOpenJobDetails={setOpenJobDetails}
           openJobDetail={openJobDetail}
         />
       ) : reviewCreatedJob ? (
@@ -55,7 +57,11 @@ export default function JobCreationComponent() {
   );
 }
 
-const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
+const CreateNewJobForm = ({
+  setCreateNewJob,
+  openJobDetail,
+  setOpenJobDetails,
+}) => {
   const [jobData, setJobData] = useState({});
   const [count, setCount] = useState(1);
   const companyId = localStorage.getItem("userId");
@@ -84,7 +90,10 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
   }, [jobData]);
 
   const postJob = () => {
-    if (jobData) createNewJobOpening(jobData, companyId);
+    if (jobData) {
+      createNewJobOpening(jobData, companyId);
+      setCreateNewJob(false);
+    }
   };
   return (
     <Grid
@@ -225,6 +234,21 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
         >
           Back
         </Button>
+        {openJobDetail && (
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            style={{ margin: "30px" }}
+            onClick={() => {
+              deleteThisJob(openJobDetail);
+              setCreateNewJob(false);
+              setOpenJobDetails(undefined);
+            }}
+          >
+            Delete this job
+          </Button>
+        )}
         <Button
           type="submit"
           variant="contained"
