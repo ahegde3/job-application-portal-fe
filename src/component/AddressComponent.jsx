@@ -31,7 +31,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, streetNo: e.target.value })
               )
             }
-            // autoFocus
+             autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -49,7 +49,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, streetName: e.target.value })
               )
             }
-            // autoFocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -67,7 +67,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, city: e.target.value })
               )
             }
-            // autoFocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -85,7 +85,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, state: e.target.value })
               )
             }
-            // autoFocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -103,7 +103,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, country: e.target.value })
               )
             }
-            // autoFocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -121,7 +121,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, zipcode: e.target.value })
               )
             }
-            // autoFocus
+            autoFocus
           />
         </Grid>
       </Grid>

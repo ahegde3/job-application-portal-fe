@@ -133,8 +133,8 @@ const setInformation = (res)=>{
   if(userType === CANDIDATE){
     setUserInformation(res[0].userInformation);
     setUserAddress(res[0].userAddress);
-  setEducationInformation(res[0].educationInfo);
-  setWorkExperienceInformation(res[0].workExperienceInfo);
+    setEducationInformation(res[0].educationInfo);
+    setWorkExperienceInformation(res[0].workExperienceInfo);
   }
   else{
    
@@ -153,7 +153,7 @@ const setInformation = (res)=>{
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" style={{ marginBottom: '16px' }}>
           Sign up
         </Typography>
         <div>{registrationInformationComponents[currentComponentIndex]}</div>
