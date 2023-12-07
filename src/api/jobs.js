@@ -95,6 +95,23 @@ const createNewJobOpening = (jobData, companyId) => {
   });
 };
 
+const getCreatedJobs = (companyId) => {
+  const params = new URLSearchParams();
+  params.append("companyId", companyId);
+  const url = `${BASE_URL}/jobs/getJobsForCompanyId?${params.toString()}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+  }).then((result) => {
+    if (result.ok) return result.json();
+    else return undefined;
+  });
+};
+
 export {
   searchJobsByKeyword,
   getJobOpeningDetails,
@@ -102,4 +119,5 @@ export {
   applyForJob,
   getAppliedJobsForCandidate,
   createNewJobOpening,
+  getCreatedJobs
 };

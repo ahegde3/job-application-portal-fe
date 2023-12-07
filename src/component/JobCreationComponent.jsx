@@ -1,15 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Box, Grid } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { createNewJobOpening } from "../api/jobs";
+import {
+  createNewJobOpening,
+  getCreatedJobs,
+  getJobOpeningDetails,
+  getJobApplicationQuestions,
+} from "../api/jobs";
+import JobList from "./JobList";
 
 export default function JobCreationComponent() {
   const [createNewJob, setCreateNewJob] = useState(false);
+  const [openJobDetail, setOpenJobDetails] = useState(undefined);
+  const [reviewCreatedJob, setReviewCreatedJob] = useState(false);
+
+  useEffect(() => {
+    setReviewCreatedJob(false);
+  }, [openJobDetail]);
+  console.log(openJobDetail);
   return (
     <Box>
-      {createNewJob ? (
-        <CreateNewJobForm setCreateNewJob={setCreateNewJob} />
+      {createNewJob || openJobDetail ? (
+        <CreateNewJobForm
+          setCreateNewJob={setCreateNewJob}
+          openJobDetail={openJobDetail}
+        />
+      ) : reviewCreatedJob ? (
+        <ReviewCreatedJob
+          setReviewCreatedJob={setReviewCreatedJob}
+          setOpenJobDetails={setOpenJobDetails}
+        />
       ) : (
         <Box
           gap={1}
@@ -24,7 +45,9 @@ export default function JobCreationComponent() {
           }}
         >
           <Button onClick={() => setCreateNewJob(true)}>Create New Job</Button>
-          <Button>Update Previous Jobs</Button>
+          <Button onClick={() => setReviewCreatedJob(true)}>
+            Update Previous Jobs
+          </Button>
           <Button>Review List of Applied Jobs</Button>
         </Box>
       )}
@@ -32,13 +55,36 @@ export default function JobCreationComponent() {
   );
 }
 
-const CreateNewJobForm = ({ setCreateNewJob }) => {
+const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
   const [jobData, setJobData] = useState({});
   const [count, setCount] = useState(1);
-  const candidateId = localStorage.getItem("userId");
+  const companyId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    console.log("Create", openJobDetail);
+    if (openJobDetail) {
+      getJobOpeningDetails(openJobDetail)
+        .then((res) => setJobData(res))
+        .then(() => getJobApplicationQuestions(openJobDetail))
+        .then((res) =>
+          setJobData((prevData) => {
+            console.log("Inside", res);
+            return { ...prevData, questions: res };
+          })
+        );
+    }
+  }, [openJobDetail]);
+
+  useEffect(() => {
+    console.log("jobData", jobData);
+    if (jobData?.questions) {
+      setCount(jobData.questions.length ?? 1);
+      console.log("length", jobData.questions.length);
+    }
+  }, [jobData]);
 
   const postJob = () => {
-    if (jobData) createNewJobOpening(jobData, candidateId);
+    if (jobData) createNewJobOpening(jobData, companyId);
   };
   return (
     <Grid
@@ -61,6 +107,7 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
           fullWidth
           id="jobTitle"
           label="Job Title"
+          value={jobData?.jobTitle}
           onChange={(e) =>
             setJobData(
               (jobData) => (jobData = { ...jobData, jobTitle: e.target.value })
@@ -74,8 +121,9 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
           variant="outlined"
           required
           fullWidth
-          id="noOfVacanicies"
+          id="noOfVacancies"
           label="No of Vacancies"
+          value={jobData?.noOfVacancies}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -92,6 +140,7 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
           fullWidth
           id="jobLocation"
           label="Job Location"
+          value={jobData?.jobLocation}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -107,6 +156,7 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
           fullWidth
           id="jobDescription"
           label="Job Description"
+          value={jobData?.jobDescription}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -122,6 +172,7 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
           fullWidth
           id="requirements"
           label="Requirements"
+          value={jobData?.requirements}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -138,13 +189,14 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
             fullWidth
             id="questions"
             label="Application Questions"
+            value={jobData?.questions?.[index]?.appQuestionDesc}
             onChange={(e) =>
               setJobData((jobData) => {
                 console.log(jobData, index);
                 if (jobData === undefined) jobData = { questions: [] };
                 else if (jobData?.questions === undefined)
                   jobData.questions = [];
-                jobData.questions[index] = e.target.value;
+                jobData.questions[index] = { appQuestionDesc: e.target.value };
                 return jobData;
               })
             }
@@ -183,5 +235,30 @@ const CreateNewJobForm = ({ setCreateNewJob }) => {
         </Button>
       </Box>
     </Grid>
+  );
+};
+
+const ReviewCreatedJob = ({ setReviewCreatedJob, setOpenJobDetails }) => {
+  const companyId = localStorage.getItem("userId");
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    getCreatedJobs(companyId).then((res) => setJobs(res));
+  }, []);
+
+  return (
+    <Box>
+      <h2>Open jobs</h2>
+      <JobList jobs={jobs} setOpenJobDetails={setOpenJobDetails} />
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        style={{ margin: "30px" }}
+        onClick={() => setReviewCreatedJob(false)}
+      >
+        Back
+      </Button>
+    </Box>
   );
 };
