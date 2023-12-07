@@ -107,13 +107,13 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
           fullWidth
           id="jobTitle"
           label="Job Title"
-          value={jobData?.jobTitle}
+          value={jobData?.jobTitle || ""}
           onChange={(e) =>
             setJobData(
               (jobData) => (jobData = { ...jobData, jobTitle: e.target.value })
             )
           }
-          // autoFocus
+          autoFocus
         />
       </Grid>
       <Grid item xs={12} sm={20}>
@@ -130,7 +130,7 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
                 (jobData = { ...jobData, noOfVacancies: e.target.value })
             )
           }
-          // autoFocus
+          autoFocus
         />
       </Grid>
       <Grid item xs={12} sm={20}>
@@ -154,13 +154,13 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
           variant="outlined"
           required
           fullWidth
-          id="jobDescription"
+          id="jobDesc"
           label="Job Description"
-          value={jobData?.jobDescription}
+          value={jobData?.jobDesc}
           onChange={(e) =>
             setJobData(
               (jobData) =>
-                (jobData = { ...jobData, jobDescription: e.target.value })
+                (jobData = { ...jobData, jobDesc: e.target.value })
             )
           }
         />
@@ -189,7 +189,7 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
             fullWidth
             id="questions"
             label="Application Questions"
-            value={jobData?.questions?.[index]?.appQuestionDesc}
+            value={jobData?.questions?.[index]?.appQuestionDesc || ""}
             onChange={(e) =>
               setJobData((jobData) => {
                 console.log(jobData, index);
@@ -200,6 +200,7 @@ const CreateNewJobForm = ({ setCreateNewJob, openJobDetail }) => {
                 return jobData;
               })
             }
+            autoFocus
           />
         </Grid>
       ))}
