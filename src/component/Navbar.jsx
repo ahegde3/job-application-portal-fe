@@ -51,6 +51,8 @@ export default function Navbar() {
         <MenuItem
           onClick={() => {
             localStorage.removeItem("isLogged");
+            localStorage.removeItem("userType");
+            localStorage.removeItem("userId");
             navigate("/");
           }}
         >
