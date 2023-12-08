@@ -11,7 +11,7 @@ export default function DiversityComponent({
   setDiversityInformation,
   diversityInformation,
 }) {
-  console.log("diversityInformation", diversityInformation);
+
   const diversityOptions = [
     {
       title: "Gender Identity⁠ :",
@@ -73,15 +73,11 @@ export default function DiversityComponent({
                   value={option}
                   checked={diversityInformation?.[group.columValue] == option}
                   onClick={(e) => {
-                    console.log(group.columValue, e.target.value);
                     setDiversityInformation((prevValue) => {
                       return {
                         ...prevValue,
                         [group.columValue]: e.target.value,
                       };
-                      // console.log(prevValue);
-                      // if (prevValue === undefined) prevValue = {};
-                      // prevValue[group.columValue] = e.target.value;
                     });
                   }}
                   control={<Radio />}

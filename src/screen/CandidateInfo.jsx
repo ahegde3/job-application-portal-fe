@@ -11,7 +11,7 @@ export default function CandidateInfo() {
   const [candidateInformation, setCandidateInformation] = useState(undefined);
   const { candidateId, jobId } = useLocation()?.state;
   const navigate = useNavigate();
-  console.log(candidateId, jobId);
+
   useEffect(() => {
     getCandidateInformation(candidateId).then((res) =>
       setCandidateInformation(res[0])

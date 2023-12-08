@@ -24,14 +24,13 @@ export default function JobApplication({ jobId, applicationQuestions }) {
   return (
     <div>
       <div>
-        {console.log(answers)}
         <h2>Apply for this Job</h2>
       </div>
       <Grid container spacing={2}>
         {applicationQuestions?.map(
           ({ appQuestionDesc, appQuestionId }, key) => (
             <Grid item xs={12} key={key}>
-              {console.log(key)}
+   
               <TextField
                 key={key}
                 variant="outlined"
@@ -41,7 +40,7 @@ export default function JobApplication({ jobId, applicationQuestions }) {
                 label={appQuestionDesc}
                 onChange={(e) =>
                   setAnswers((prevAnswer) => {
-                    console.log(prevAnswer);
+            
                     if (prevAnswer === undefined) prevAnswer = [];
                     prevAnswer[key] = {
                       answerDesc: e.target.value,

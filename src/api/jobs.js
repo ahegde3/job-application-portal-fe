@@ -53,7 +53,7 @@ const getJobApplicationQuestions = (jobId) => {
 };
 
 const applyForJob = (candidateId, jobId, answers) => {
-  console.log(candidateId, jobId, answers);
+ 
   const url = `${BASE_URL}/jobs/applyForJobs`;
   return fetch(url, {
     method: "POST",

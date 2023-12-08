@@ -66,6 +66,7 @@ export default function UpdateProfile() {
       userInformation={userInformation}
     />,
     <AddressComponent
+      userType={userType}
       userAddress={userAddress}
       setUserAddress={setUserAddress}
     />,
@@ -79,6 +80,7 @@ export default function UpdateProfile() {
       isUpdate={true}
     />,
     <AddressComponent
+      userType={userType}
       userAddress={userAddress}
       setUserAddress={setUserAddress}
     />,
@@ -127,7 +129,6 @@ export default function UpdateProfile() {
   };
 
   useEffect(() => {
-    console.log(localStorage.getItem("userId"));
     if (userType === CANDIDATE) {
       getCandidateInformation(localStorage.getItem("userId")).then((res) =>
         setInformation(res)
@@ -160,9 +161,6 @@ export default function UpdateProfile() {
 
   return (
     <Container component="main" maxWidth="xs">
-      {/* {console.log(
-        userInformation
-      )} */}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

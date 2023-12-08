@@ -28,7 +28,7 @@ export default function SearchBox({ setIsSearched, setJobList }) {
       <SearchBar
         onRequestSearch={(value) => {
           setIsSearched(true);
-          console.log("on press", value);
+
           searchJobs(value);
         }}
         placeholder="Search Job"

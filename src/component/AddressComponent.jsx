@@ -4,8 +4,11 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Box } from "@mui/material";
 
-export default function AddressComponent({ userAddress, setUserAddress }) {
-  
+export default function AddressComponent({
+  userType,
+  userAddress,
+  setUserAddress,
+}) {
   return (
     <Box>
       <Typography
@@ -13,7 +16,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
         variant="h5"
         style={{ marginBottom: "12px", textAlign: "center" }}
       >
-        Candidate Address
+        {userType} Address
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
@@ -31,7 +34,7 @@ export default function AddressComponent({ userAddress, setUserAddress }) {
                   (addressData = { ...addressData, streetNo: e.target.value })
               )
             }
-             autoFocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>

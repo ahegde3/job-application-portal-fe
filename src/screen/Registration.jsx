@@ -63,6 +63,7 @@ export default function Registration() {
     userInformation={userInformation}
     setUserInformation={setUserInformation} />,
     <AddressComponent 
+    userType={userType} 
     userAddress={userAddress}
     setUserAddress={setUserAddress} />,
   ];
@@ -74,6 +75,7 @@ export default function Registration() {
       setUserInformation={setUserInformation}
     />,
     <AddressComponent
+    userType={userType} 
       userAddress={userAddress}
       setUserAddress={setUserAddress}
     />,

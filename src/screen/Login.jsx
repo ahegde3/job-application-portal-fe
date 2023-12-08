@@ -41,7 +41,6 @@ export default function Login() {
   };
 
   const handleSubmit = (event) => {
-    console.log("inside submit", email, password, currentTab);
     event.preventDefault();
     if (email && password)
       authenticateUser[currentTab]?.(email, password).then((res) => {
@@ -51,7 +50,6 @@ export default function Login() {
           });
           return;
         }
-        console.log(res);
         localStorage.setItem("isLogged", true);
         localStorage.setItem("userType", currentTab);
         localStorage.setItem("userId", res.user_id);

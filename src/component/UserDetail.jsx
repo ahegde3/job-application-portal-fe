@@ -12,16 +12,8 @@ export default function UserDetail({
   setUserInformation,
   isUpdate,
 }) {
-  console.log(userInformation);
-  //const [name,setName]
-  // const [userProfileData, setUserProfileData] = useState({});
 
-  // useEffect(() => {
-  //   if (!isUpdate) return;
-  //   getCandidateInformation(localStorage.getItem("userId")).then((res) =>
-  //     setUserProfileData(res)
-  //   );
-  // }, []);
+
 
   return (
     <Box>
@@ -143,7 +135,7 @@ const CompanyInformationComponent = ({
   userInformation,
   setUserInformation,
 }) => {
-  console.log(userInformation);
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>

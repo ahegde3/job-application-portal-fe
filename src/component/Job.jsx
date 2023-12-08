@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 export default function Job({ job, setOpenJobDetails, unClickable }) {
-  console.log("job", job);
+
   const navigate = useNavigate();
   return (
     <Card
