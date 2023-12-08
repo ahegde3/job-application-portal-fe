@@ -102,6 +102,7 @@ const CreateNewJobForm = ({
     if (jobData) {
       createNewJobOpening(jobData, companyId);
       setCreateNewJob(false);
+      setOpenJobDetails(undefined);
     }
   };
   return (
