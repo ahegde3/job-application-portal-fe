@@ -1,8 +1,9 @@
 import { BASE_URL } from "../constant/api";
 
-const searchJobsByKeyword = (keyword) => {
+const searchJobsByKeyword = (keyword, candidateId) => {
   const params = new URLSearchParams();
   params.append("keyword", keyword);
+  params.append("candidateId", candidateId);
   const url = `${BASE_URL}/jobs/searchJobByKeyword?${params.toString()}`;
   return fetch(url, {
     method: "GET",

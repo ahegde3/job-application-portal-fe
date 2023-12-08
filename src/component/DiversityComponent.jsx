@@ -7,7 +7,11 @@ import FormLabel from "@mui/material/FormLabel";
 
 import React from "react";
 
-export default function DiversityComponent({ setDiversityInformation }) {
+export default function DiversityComponent({
+  setDiversityInformation,
+  diversityInformation,
+}) {
+  console.log("diversityInformation", diversityInformation);
   const diversityOptions = [
     {
       title: "Gender Identity⁠ :",
@@ -56,7 +60,7 @@ export default function DiversityComponent({ setDiversityInformation }) {
       <br />
       <div style={{ display: "flex", flexDirection: "column", margin: "30px" }}>
         {diversityOptions?.map((group, key) => (
-          <FormControl key={key}>
+          <FormControl key={key} style={{ margin: "30px" }}>
             <FormLabel id={`group-label-${key}`}>{group.title}</FormLabel>
             <RadioGroup
               aria-labelledby={`group-label-${key}`}
@@ -67,6 +71,7 @@ export default function DiversityComponent({ setDiversityInformation }) {
                 <FormControlLabel
                   key={key2}
                   value={option}
+                  checked={diversityInformation?.[group.columValue] == option}
                   onClick={(e) => {
                     console.log(group.columValue, e.target.value);
                     setDiversityInformation((prevValue) => {

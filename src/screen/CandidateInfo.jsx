@@ -4,10 +4,13 @@ import Button from "@material-ui/core/Button";
 import { useLocation } from "react-router-dom";
 import { getCandidateInformation } from "../api/candidate";
 import { updateJobApplicationStatus } from "../api/jobs";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../component/Navbar";
 
 export default function CandidateInfo() {
   const [candidateInformation, setCandidateInformation] = useState(undefined);
   const { candidateId, jobId } = useLocation()?.state;
+  const navigate = useNavigate();
   console.log(candidateId, jobId);
   useEffect(() => {
     getCandidateInformation(candidateId).then((res) =>
@@ -17,6 +20,7 @@ export default function CandidateInfo() {
 
   return (
     <div>
+      <Navbar />
       <h2>Candidate Information</h2>
       {candidateInformation != undefined && (
         <div>
@@ -59,7 +63,7 @@ export default function CandidateInfo() {
 
           <h2>Education Information</h2>
           <ul>
-            {candidateInformation.educationInfo.map((education, index) => (
+            {candidateInformation.educationInfo?.map((education, index) => (
               <li key={index}>
                 {/* Render each education item */}
                 {/* For example: */}
@@ -72,7 +76,7 @@ export default function CandidateInfo() {
 
           <h2>Work Experience Information</h2>
           <ul>
-            {candidateInformation.workExperienceInfo.map(
+            {candidateInformation.workExperienceInfo?.map(
               (experience, index) => (
                 <li key={index}>
                   {/* Render each work experience item */}
@@ -91,7 +95,19 @@ export default function CandidateInfo() {
               color="primary"
               style={{ margin: "30px" }}
               onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={{ margin: "30px" }}
+              onClick={() => {
                 updateJobApplicationStatus(jobId, candidateId, "REJECT");
+                navigate(-1);
               }}
             >
               Reject
@@ -104,6 +120,7 @@ export default function CandidateInfo() {
               style={{ margin: "30px" }}
               onClick={() => {
                 updateJobApplicationStatus(jobId, candidateId, "ACCEPT");
+                navigate(-1);
               }}
             >
               Accept

@@ -11,6 +11,8 @@ import { searchJobsByKeyword } from "../api/jobs";
 export default function SearchBox({ setIsSearched, setJobList }) {
   // const { handleChange } = React.useContext(ImageContext);
 
+  const candidateId = localStorage.getItem("userId");
+
   const searchJobs = (keyword) => {
     if (!keyword) {
       toast.error("Enter valid email id and password", {
@@ -18,7 +20,7 @@ export default function SearchBox({ setIsSearched, setJobList }) {
       });
       return;
     }
-    searchJobsByKeyword(keyword).then((res) => setJobList(res));
+    searchJobsByKeyword(keyword, candidateId).then((res) => setJobList(res));
   };
 
   return (

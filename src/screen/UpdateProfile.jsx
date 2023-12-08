@@ -17,7 +17,7 @@ import EducationComponent from "../component/EducationComponent";
 import WorkExperienceComponent from "../component/WorkExperienceComponent";
 import DiversityComponent from "../component/DiversityComponent";
 import { CANDIDATE } from "../constant/constants";
-import { registerCompany,getCompanyInformation } from "../api/company";
+import { registerCompany, getCompanyInformation } from "../api/company";
 import { registerCanidate, getCandidateInformation } from "../api/candidate";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,8 +60,15 @@ export default function UpdateProfile() {
   const navigate = useNavigate();
 
   const companyRegistrationComponent = [
-    <UserDetail userType={userType} setUserInformation={setUserInformation} userInformation={userInformation} />,
-    <AddressComponent  userAddress={userAddress} setUserAddress={setUserAddress} />,
+    <UserDetail
+      userType={userType}
+      setUserInformation={setUserInformation}
+      userInformation={userInformation}
+    />,
+    <AddressComponent
+      userAddress={userAddress}
+      setUserAddress={setUserAddress}
+    />,
   ];
 
   const candidateRegistrationComponent = [
@@ -120,28 +127,36 @@ export default function UpdateProfile() {
   };
 
   useEffect(() => {
-    console.log(localStorage.getItem("userId"))
-    if(userType === CANDIDATE){
-    getCandidateInformation(localStorage.getItem("userId")).then((res) =>setInformation(res) );
-  }
-  else getCompanyInformation(localStorage.getItem("userId")).then(res=>setInformation(res))
+    console.log(localStorage.getItem("userId"));
+    if (userType === CANDIDATE) {
+      getCandidateInformation(localStorage.getItem("userId")).then((res) =>
+        setInformation(res)
+      );
+    } else
+      getCompanyInformation(localStorage.getItem("userId")).then((res) =>
+        setInformation(res)
+      );
   }, [userType]);
 
-
-const setInformation = (res)=>{
-
-  if(userType === CANDIDATE){
-    setUserInformation(res[0].userInformation);
-    setUserAddress(res[0].userAddress);
-    setEducationInformation(res[0].educationInfo);
-    setWorkExperienceInformation(res[0].workExperienceInfo);
-  }
-  else{
-   
-    setUserInformation(res);
-    setUserAddress({streetNo:res.streetNo, streetName:res.streetName, city: res.city, state: res.state, country: res.country, zipcode: res.zipcode});
-  }
-}
+  const setInformation = (res) => {
+    if (userType === CANDIDATE) {
+      setUserInformation(res[0].userInformation);
+      setUserAddress(res[0].userAddress);
+      setEducationInformation(res[0].educationInfo);
+      setWorkExperienceInformation(res[0].workExperienceInfo);
+      setDiversityInformation(res[0].diversityInformation);
+    } else {
+      setUserInformation(res);
+      setUserAddress({
+        streetNo: res.streetNo,
+        streetName: res.streetName,
+        city: res.city,
+        state: res.state,
+        country: res.country,
+        zipcode: res.zipcode,
+      });
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -153,7 +168,11 @@ const setInformation = (res)=>{
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" style={{ marginBottom: '16px' }}>
+        <Typography
+          component="h1"
+          variant="h5"
+          style={{ marginBottom: "16px" }}
+        >
           Sign up
         </Typography>
         <div>{registrationInformationComponents[currentComponentIndex]}</div>

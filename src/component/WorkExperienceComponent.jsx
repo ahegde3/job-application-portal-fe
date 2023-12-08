@@ -50,7 +50,9 @@ const WorkexperienceDetailComponent = ({
   workExperienceInformation,
   setWorkExperienceInformation,
 }) => {
-  const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(false);
+  const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(
+    workExperienceInformation?.[position]?.isCurrentlyWorking || false
+  );
 
   const setWorkExperienceValues = (key, value, position) => {
     setWorkExperienceInformation((prevExperience) => {
@@ -95,7 +97,11 @@ const WorkexperienceDetailComponent = ({
           label="Organization"
           value={workExperienceInformation?.[position]?.organizationName}
           onChange={(e) =>
-            setWorkExperienceValues("organizationName", e.target.value, position)
+            setWorkExperienceValues(
+              "organizationName",
+              e.target.value,
+              position
+            )
           }
           autoFocus
         />
@@ -168,9 +174,10 @@ const WorkexperienceDetailComponent = ({
       <FormControlLabel
         control={
           <Checkbox
+            checked={isCurrentlyWorking}
             onClick={() => {
               setIsCurrentlyWorking(!isCurrentlyWorking);
-              setWorkExperienceValues("isCurrentlyWorkingy", true, position);
+              setWorkExperienceValues("isCurrentlyWorking", true, position);
             }}
           />
         }

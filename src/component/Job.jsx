@@ -4,11 +4,16 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 export default function Job({ job, setOpenJobDetails, unClickable }) {
-  console.log("job", setOpenJobDetails);
+  console.log("job", job);
   const navigate = useNavigate();
   return (
     <Card
-      style={{ marginTop: "10px", borderRadius: "10px", cursor: "pointer" }}
+      style={{
+        marginTop: "10px",
+        borderRadius: "10px",
+        cursor: "pointer",
+        border: "2px solid",
+      }}
       onClick={() => {
         if (setOpenJobDetails != undefined) setOpenJobDetails(job.jobId);
         else if (!unClickable)
@@ -17,7 +22,7 @@ export default function Job({ job, setOpenJobDetails, unClickable }) {
       className="job"
     >
       <CardContent>
-        <h1>{job?.title}</h1>
+        <h3>{job?.title}</h3>
         <h3>{job?.companyName}</h3>
         <p> {job?.location}</p>
       </CardContent>

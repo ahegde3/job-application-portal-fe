@@ -8,12 +8,13 @@ export default function Opening() {
   const { state } = useLocation();
   //console.log(state);
 
-  const { jobId, name, companyName, location, description } = state.job || {};
+  const { jobId, name, companyName, location } = state.job || {};
 
   const [applyForTheJob, setApplyForJobs] = useState(false);
   const [applicationQuestions, setApplicationQuestions] = useState([]);
   const [requirements, setRequirements] = useState(null);
   const [companyInfo, setCompanyInfo] = useState(null);
+  const [jobDescription, setJobDescription] = useState(null);
 
   // const requirements = `Required Qualifications\n\n
   // - Bachelors or advanced degree in Computer Science/Engineering or equivalent.\n\n
@@ -37,11 +38,13 @@ export default function Opening() {
     getJobOpeningDetails(jobId).then((res) => {
       setRequirements(res?.requirements);
       setCompanyInfo(res.companyDesc);
+      setJobDescription(res.jobDesc);
     });
   }, []);
 
   return (
     <div>
+      {console.log("jobDesc", jobDescription)}
       <h1>{name}</h1>
       <table style={{ margin: "25px", display: "table" }}>
         <tr>
@@ -54,7 +57,7 @@ export default function Opening() {
         </tr>
         <tr>
           <td>Description :</td>
-          <td> {description}</td>
+          <td> {jobDescription}</td>
         </tr>
       </table>
 

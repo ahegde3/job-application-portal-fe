@@ -10,7 +10,9 @@ export default function EducationComponent({
   setEducationInformation,
 }) {
   console.log("count educations", educationInformation);
-  const [count, setCount] = useState(educationInformation?.length>0 ?educationInformation?.length:1);
+  const [count, setCount] = useState(
+    educationInformation?.length > 0 ? educationInformation?.length : 1
+  );
   console.log(count);
 
   return (
@@ -69,7 +71,7 @@ const EducationDetailsComponent = ({
   return (
     <Grid container spacing={2}>
       {position > 0 && <ColoredLine />}
-      <h2 style={{ position: "relative", right: "69%" }}>
+      <h2 style={{ position: "relative", right: position > 0 ? "69%" : null }}>
         {" "}
         Education {position + 1}
       </h2>
@@ -83,7 +85,7 @@ const EducationDetailsComponent = ({
           label="University"
           value={educationInformation?.[position]?.universityName}
           onChange={(e) =>
-            setEducationValues("university", e.target.value, position)
+            setEducationValues("universityName", e.target.value, position)
           }
           autoFocus
         />
@@ -97,7 +99,7 @@ const EducationDetailsComponent = ({
           label="Degree Type"
           value={educationInformation?.[position]?.degree}
           onChange={(e) =>
-            setEducationValues("degreeType", e.target.value, position)
+            setEducationValues("degree", e.target.value, position)
           }
           autoFocus
         />

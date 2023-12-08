@@ -43,7 +43,7 @@ export default function JobCreationComponent() {
           setOpenJobDetails={setOpenJobDetails}
         />
       ) : reviewCandidate ? (
-        <ReviewCandidates />
+        <ReviewCandidates setReviewCandidate={setReviewCandidate} />
       ) : (
         <Box
           gap={1}
@@ -141,7 +141,7 @@ const CreateNewJobForm = ({
           fullWidth
           id="noOfVacancies"
           label="No of Vacancies"
-          value={jobData?.noOfVacancies}
+          value={jobData?.noOfVacancies || ""}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -158,7 +158,7 @@ const CreateNewJobForm = ({
           fullWidth
           id="jobLocation"
           label="Job Location"
-          value={jobData?.jobLocation}
+          value={jobData?.jobLocation || ""}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -174,7 +174,7 @@ const CreateNewJobForm = ({
           fullWidth
           id="jobDesc"
           label="Job Description"
-          value={jobData?.jobDesc}
+          value={jobData?.jobDesc || ""}
           onChange={(e) =>
             setJobData(
               (jobData) => (jobData = { ...jobData, jobDesc: e.target.value })
@@ -189,7 +189,7 @@ const CreateNewJobForm = ({
           fullWidth
           id="requirements"
           label="Requirements"
-          value={jobData?.requirements}
+          value={jobData?.requirements || ""}
           onChange={(e) =>
             setJobData(
               (jobData) =>
@@ -213,6 +213,7 @@ const CreateNewJobForm = ({
                 else if (jobData?.questions === undefined)
                   jobData.questions = [];
                 jobData.questions[index] = { appQuestionDesc: e.target.value };
+
                 return jobData;
               })
             }
@@ -282,7 +283,15 @@ const ReviewCreatedJob = ({ setReviewCreatedJob, setOpenJobDetails }) => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      style={{
+        border: "2px solid",
+        position: "relative",
+        margin: "23px",
+        background: "cadetblue",
+        borderRadius: "2px",
+      }}
+    >
       <h2>Open jobs</h2>
       <JobList jobs={jobs} setOpenJobDetails={setOpenJobDetails} />
       <Button
@@ -298,7 +307,7 @@ const ReviewCreatedJob = ({ setReviewCreatedJob, setOpenJobDetails }) => {
   );
 };
 
-const ReviewCandidates = () => {
+const ReviewCandidates = ({ setReviewCandidate }) => {
   const companyId = localStorage.getItem("userId");
   const [jobId, setJobId] = useState(undefined);
   const [jobs, setJobs] = useState([]);
@@ -313,33 +322,59 @@ const ReviewCandidates = () => {
     setJobId(jobId);
     getCandidatesAppliedForJob(jobId).then((res) => setCandidateList(res));
   };
-  return (
-    <Box>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Jobs</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          //   value={age}
-          label="Jobs"
-          onChange={handleChange}
+
+  if (jobs.length > 0)
+    return (
+      <Box style={{ margin: "30px" }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Jobs</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            //   value={age}
+            MenuProps={{
+              MenuListProps: {
+                sx: {
+                  "li.MuiButtonBase-root": {
+                    display: "flex",
+                    flexDirection: "column",
+                  },
+                },
+              },
+            }}
+            label="Jobs"
+            onChange={handleChange}
+          >
+            {jobs.map((job) => (
+              <MenuItem value={job.jobId}>{job.title}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {candidateList.length > 0 && (
+          <Box
+            style={{
+              background: "cadetblue",
+              padding: "10px",
+              margin: "21px",
+              borderRadius: "7px",
+            }}
+          >
+            {candidateList.map((candidate) => (
+              <List list={candidate} jobId={jobId} />
+            ))}
+          </Box>
+        )}
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          style={{ margin: "30px" }}
+          onClick={() => setReviewCandidate(false)}
         >
-          {jobs.map((job) => (
-            <MenuItem value={job.jobId}>{job.title}</MenuItem>
-          ))}
-          {/* <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
-        </Select>
-      </FormControl>
-      {console.log(candidateList)}
-      <Box>
-        {candidateList.map((candidate) => (
-          <List list={candidate} jobId={jobId} />
-        ))}
+          Back
+        </Button>
       </Box>
-    </Box>
-  );
+    );
 };
 
 const List = ({ list, jobId }) => {
@@ -347,7 +382,12 @@ const List = ({ list, jobId }) => {
 
   return (
     <Card
-      style={{ marginTop: "10px", borderRadius: "10px", cursor: "pointer" }}
+      style={{
+        marginTop: "10px",
+        borderRadius: "10px",
+        cursor: "pointer",
+        border: "2px solid",
+      }}
       onClick={() => {
         navigate("/candidateInfo", {
           replace: true,
